@@ -7,6 +7,8 @@ public class ToppingCollisionManager : MonoBehaviour
 {
     private Rigidbody rb;
 
+    public Hand hand;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -16,7 +18,7 @@ public class ToppingCollisionManager : MonoBehaviour
     
     public void OnCollisionEnter(Collision other)
     {
-        if(other.gameObject.CompareTag("Base"))
+        if((other.gameObject.CompareTag("Topping")) && (SushiManager.instance.holding == null))
         {
             Destroy(other.gameObject.GetComponent<Throwable>());
             Destroy(other.gameObject.GetComponent<Rigidbody>());
