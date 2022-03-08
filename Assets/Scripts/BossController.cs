@@ -12,6 +12,8 @@ public class BossController : MonoBehaviour
 
     int counter = 0;
 
+    public GameObject spikeStarter;
+
     // Start is called before the first frame update
     void Start()
     {
