@@ -58,3 +58,5 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+/Assets/SteamVR_Resources/Resources/SteamVR_Settings.asset
+/Assets/SteamVR_Resources/Resources/SteamVR_Settings.asset.meta
