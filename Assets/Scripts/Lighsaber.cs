@@ -157,11 +157,8 @@ public class Lighsaber : MonoBehaviour
 
          Sliceable sliceable = other.gameObject.GetComponent<Sliceable>();
 
-        if(sliceable == null)
+        if(sliceable != null)
         {
-            //throw new NotSupportedException("Cannot slice non sliceable object, add the sliceable script to the object or inherit from sliceable to support slicing");
-        }else{
-
             GameObject[] slices = Slicer.Slice(plane, other.gameObject);
             Destroy(other.gameObject);
 
