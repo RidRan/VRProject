@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
+using Valve.VR.InteractionSystem;
 
 namespace Assets.Scripts
 {
@@ -73,6 +74,9 @@ namespace Assets.Scripts
             meshGameObject.transform.position = originalObject.transform.position;
 
             meshGameObject.tag = originalObject.tag;
+
+            //meshGameObject.AddComponent<Interactable>();
+            //meshGameObject.AddComponent<Throwable>();
 
             return meshGameObject;
         }
