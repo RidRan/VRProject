@@ -14,6 +14,8 @@ public class BossController : MonoBehaviour
 
     public GameObject spikeStarter;
 
+    public int numSpikes = 1;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +25,10 @@ public class BossController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (counter % 100000 == 0)
+        {
+            Attack();
+        }
     }
 
     void FixedUpdate()
