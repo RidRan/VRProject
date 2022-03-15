@@ -8,6 +8,15 @@ namespace Assets.Scripts
 {
     class Slicer
     {
+        private SushiManager sushiManager;
+
+        void Start()
+        {
+            sushiManager = GameObject.FindGameObjectWithTag("SushiManager").GetComponent<SushiManager>();
+        }
+
+
+
         /// <summary>
         /// Slice the object by the plane 
         /// </summary>
@@ -75,8 +84,7 @@ namespace Assets.Scripts
 
             meshGameObject.tag = originalObject.tag;
 
-            //meshGameObject.AddComponent<Interactable>();
-            //meshGameObject.AddComponent<Throwable>();
+
 
             return meshGameObject;
         }
@@ -94,6 +102,8 @@ namespace Assets.Scripts
 
             var rb = gameObject.AddComponent<Rigidbody>();
             rb.useGravity = useGravity;
+            gameObject.AddComponent<Interactable>();
+            gameObject.AddComponent<Throwable>();
         }
     }
 }
