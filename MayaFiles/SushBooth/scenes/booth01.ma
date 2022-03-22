@@ -1,6 +1,6 @@
 //Maya ASCII 2022 scene
 //Name: booth01.ma
-//Last modified: Tue, Mar 22, 2022 05:50:20 PM
+//Last modified: Tue, Mar 22, 2022 05:51:02 PM
 //Codeset: 1252
 requires maya "2022";
 requires "mtoa" "5.0.0.1";
@@ -11,18 +11,18 @@ fileInfo "product" "Maya 2022";
 fileInfo "version" "2022";
 fileInfo "cutIdentifier" "202110272215-ad32f8f1e6";
 fileInfo "osv" "Windows 10 Pro v2009 (Build: 19042)";
-fileInfo "UUID" "55F8905F-433F-C481-C44C-508B50C65B80";
+fileInfo "UUID" "1FDC6B57-4CF3-7E23-80AC-30BDCE8223D0";
 fileInfo "license" "education";
 createNode transform -s -n "persp";
 	rename -uid "DC52F591-2848-F5D9-0EE8-289D64A84E38";
 	setAttr ".v" no;
-	setAttr ".t" -type "double3" 13.328139747643091 4.2595625908829664 8.2584368817128375 ;
+	setAttr ".t" -type "double3" 21.449847827693485 4.4068212081330609 12.114907415561952 ;
 	setAttr ".r" -type "double3" -0.93835273119391716 -3535.4000000021379 0 ;
 createNode camera -s -n "perspShape" -p "persp";
 	rename -uid "45536986-724D-5254-6613-EB8060376894";
 	setAttr -k off ".v" no;
 	setAttr ".fl" 34.999999999999986;
-	setAttr ".coi" 16.787061728319358;
+	setAttr ".coi" 25.779068857784768;
 	setAttr ".imn" -type "string" "persp";
 	setAttr ".den" -type "string" "persp_depth";
 	setAttr ".man" -type "string" "persp_mask";
@@ -4149,7 +4149,7 @@ createNode polyCube -n "polyCube11";
 	rename -uid "00B81BED-43BA-F48E-CD59-82A1221E1B43";
 	setAttr ".cuv" 4;
 createNode nodeGraphEditorInfo -n "hyperShadePrimaryNodeEditorSavedTabsInfo";
-	rename -uid "29381E21-4131-8521-4F2B-1EAF426FDECD";
+	rename -uid "91D75CD6-498A-17F8-0163-3EAF19BEDD63";
 	setAttr ".tgi[0].tn" -type "string" "Untitled_1";
 	setAttr ".tgi[0].vl" -type "double2" -645.23806959863782 -146.42856561002293 ;
 	setAttr ".tgi[0].vh" -type "double2" 642.85711731229605 241.66665706369645 ;
