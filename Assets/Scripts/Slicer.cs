@@ -84,13 +84,6 @@ namespace Assets.Scripts
 
             meshGameObject.tag = originalObject.tag;
 
-<<<<<<< michael-branch
-
-=======
-            meshGameObject.AddComponent<Interactable>();
-            meshGameObject.AddComponent<Throwable>();
->>>>>>> main
-
             return meshGameObject;
         }
 
