@@ -160,6 +160,7 @@ public class Lighsaber : MonoBehaviour
         if(sliceable != null)
         {
             GameObject[] slices = Slicer.Slice(plane, other.gameObject);
+            Debug.Log("here");
             Destroy(other.gameObject);
 
             Rigidbody rigidbody = slices[1].GetComponent<Rigidbody>();
