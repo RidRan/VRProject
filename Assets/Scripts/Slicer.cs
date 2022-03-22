@@ -49,8 +49,8 @@ namespace Assets.Scripts
             positiveObject.GetComponent<MeshFilter>().mesh = positiveSideMeshData;
             negativeObject.GetComponent<MeshFilter>().mesh = negativeSideMeshData;
 
-            SetupCollidersAndRigidBodys(ref positiveObject, positiveSideMeshData, sliceable.UseGravity);
-            SetupCollidersAndRigidBodys(ref negativeObject, negativeSideMeshData, sliceable.UseGravity);
+            SetupCollidersAndRigidBodys(ref positiveObject, positiveSideMeshData, sliceable.UseGravity, objectToCut.GetComponent<Throwable>());
+            SetupCollidersAndRigidBodys(ref negativeObject, negativeSideMeshData, sliceable.UseGravity, objectToCut.GetComponent<Throwable>());
 
             return new GameObject[] { positiveObject, negativeObject};
 
@@ -84,12 +84,8 @@ namespace Assets.Scripts
 
             meshGameObject.tag = originalObject.tag;
 
-<<<<<<< michael-branch
-
-=======
-            meshGameObject.AddComponent<Interactable>();
-            meshGameObject.AddComponent<Throwable>();
->>>>>>> main
+            //meshGameObject.AddComponent<Interactable>();
+            //meshGameObject.AddComponent<Throwable>();
 
             return meshGameObject;
         }
@@ -99,7 +95,7 @@ namespace Assets.Scripts
         /// </summary>
         /// <param name="gameObject"></param>
         /// <param name="mesh"></param>
-        private static void SetupCollidersAndRigidBodys(ref GameObject gameObject, Mesh mesh, bool useGravity)
+        private static void SetupCollidersAndRigidBodys(ref GameObject gameObject, Mesh mesh, bool useGravity, Throwable original)
         {                     
             MeshCollider meshCollider = gameObject.AddComponent<MeshCollider>();
             meshCollider.sharedMesh = mesh;
@@ -108,7 +104,7 @@ namespace Assets.Scripts
             var rb = gameObject.AddComponent<Rigidbody>();
             rb.useGravity = useGravity;
             gameObject.AddComponent<Interactable>();
-            gameObject.AddComponent<Throwable>();
+            gameObject.AddComponent<Throwable>().onPickUp = original.onPickUp;
         }
     }
 }
