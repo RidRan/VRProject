@@ -49,7 +49,7 @@ namespace Valve.VR.InteractionSystem
         protected Quaternion attachRotation;
         protected Transform attachEaseInTransform;
 
-		public UnityEvent onPickUp;
+		public UnityEvent onPickUp = new UnityEvent();
         public UnityEvent onDetachFromHand;
         public HandEvent onHeldUpdate;
 
