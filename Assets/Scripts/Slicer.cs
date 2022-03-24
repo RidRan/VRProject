@@ -105,6 +105,10 @@ namespace Assets.Scripts
             rb.useGravity = useGravity;
             gameObject.AddComponent<Interactable>();
             gameObject.AddComponent<Throwable>().onPickUp = original.onPickUp;
+            //gameObject.GetComponent<Throwable>().onPickUp. = gameObject;
+            gameObject.GetComponent<Throwable>().onDetachFromHand = original.onDetachFromHand;
+
+
         }
     }
 }
