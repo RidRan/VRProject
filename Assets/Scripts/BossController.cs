@@ -13,6 +13,7 @@ public class BossController : MonoBehaviour
     int counter = 0;
 
     public GameObject spikeStarter;
+    public GameObject spikeParent;
 
     public int numSpikes = 1;
 
@@ -22,11 +23,10 @@ public class BossController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        for (int i = 0; i < 360; i += 15)
-        {
-            GenerateSpike(0, i);
-        }
-        
+        GenerateSpike(0, 0); 
+        GenerateSpike(0, 15);
+        GenerateSpike(15, 0);
+        GenerateSpike(15, 15);
     }
 
     // Update is called once per frame
@@ -52,15 +52,26 @@ public class BossController : MonoBehaviour
         counter++;
     }
 
+    private float Sin(float angle)
+    {
+        return Mathf.Sin(angle / 180 * Mathf.PI);
+    }
+
+    private float Cos(float angle)
+    {
+        return Mathf.Cos(angle / 180 * Mathf.PI);
+    }
+
+
     public void GenerateSpike(float angleX, float angleZ)
     {
-        float height = 5f + .9f;
+        float height = 5.9f;
 
-        angleX = angleX / 180 * Mathf.PI;
-        angleZ = angleZ / 180 * Mathf.PI;
+        angleX += 90;
+        angleZ += 90;
 
-        GameObject newSpike = Instantiate(spikeStarter, transform.position + height * new Vector3(Mathf.Sin(angleX), Mathf.Cos(angleX) * Mathf.Cos(angleZ), Mathf.Sin(angleZ)), transform.localRotation, transform);
-        newSpike.transform.Rotate(-angleX * 180 / Mathf.PI, 0, 0);
+        GameObject newSpike = Instantiate(spikeStarter, transform.position + height * new Vector3(Sin(angleX) * Cos(angleZ), Sin(angleX) * Sin(angleZ), Cos(angleX)), transform.localRotation, spikeParent.transform);
+        newSpike.transform.Rotate(angleZ - 90, 0, angleX - 90);
     }
 
     void Attack()
