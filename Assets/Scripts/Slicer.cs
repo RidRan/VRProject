@@ -73,6 +73,7 @@ namespace Assets.Scripts
 
             meshGameObject.tag = originalObject.tag;
 
+
             //meshGameObject.AddComponent<Interactable>();
             //meshGameObject.AddComponent<Throwable>();
 
