@@ -8,6 +8,7 @@ public class SpawnFood : MonoBehaviour
 {
 
 	public GameObject foodPrefab;
+	public Transform SpawnPoint;
 
 	public Hand hand;
 
@@ -44,7 +45,7 @@ public class SpawnFood : MonoBehaviour
 			return null;
 		}
 
-		GameObject food = Instantiate(foodPrefab, transform.position, transform.rotation) as GameObject;
+		GameObject food = Instantiate(foodPrefab, SpawnPoint.position, transform.rotation) as GameObject;
 		food.transform.localScale = new Vector3(scale, scale, scale);
 
 
@@ -64,6 +65,7 @@ public class SpawnFood : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Topping"))
         {
+			//Debug.Log("here");
 			SpawnAFood();
 		}
 		

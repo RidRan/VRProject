@@ -478,7 +478,7 @@ GameObject:
   - component: {fileID: 215754260}
   - component: {fileID: 215754261}
   m_Layer: 0
-  m_Name: Spawn Area
+  m_Name: Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -492,9 +492,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 215754257}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.022, y: 0.187, z: 1.031}
+  m_LocalPosition: {x: 0.022000313, y: 0.1869998, z: 1.0310001}
   m_LocalScale: {x: 1.4385, y: 0.15527771, z: 1.5321406}
-  m_Children: []
+  m_Children:
+  - {fileID: 1776262415}
   m_Father: {fileID: 1418436233}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -511,6 +512,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   foodPrefab: {fileID: 7673816194883625984, guid: 3c9417d17b50c94479530dbd2cc23091, type: 3}
+  SpawnPoint: {fileID: 1776262415}
   hand: {fileID: 0}
   spawnAtStartup: 1
   sendSpawnMessageToParent: 0
@@ -1672,6 +1674,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7673816193859051743, guid: 3c9417d17b50c94479530dbd2cc23091, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7673816194883625984, guid: 3c9417d17b50c94479530dbd2cc23091, type: 3}
       propertyPath: m_Name
       value: RiceBall
@@ -1754,6 +1760,36 @@ Transform:
   - {fileID: 2118201177}
   m_Father: {fileID: 0}
   m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1776262414
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1776262415}
+  m_Layer: 0
+  m_Name: Spawn Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1776262415
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1776262414}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.129, y: 1.8, z: -0.174}
+  m_LocalScale: {x: 0.6951685, y: 6.4400744, z: 0.65268165}
+  m_Children: []
+  m_Father: {fileID: 215754258}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1896436026
 GameObject:
