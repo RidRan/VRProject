@@ -32,10 +32,7 @@ public class BossController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (counter % 100000 == 0)
-        {
-            Attack();
-        }
+        
     }
 
     void FixedUpdate()
@@ -50,6 +47,11 @@ public class BossController : MonoBehaviour
         eyes.transform.Rotate(rollSpeed, 0, 0);
 
         counter++;
+
+        if (counter % 100 == 0 || counter % 100 == 10 || counter % 100 == 20)
+        {
+            Attack();
+        }
     }
 
     private float Sin(float angle)
@@ -63,7 +65,7 @@ public class BossController : MonoBehaviour
     }
 
 
-    public void GenerateSpike(float angleX, float angleZ)
+    private void GenerateSpike(float angleX, float angleZ)
     {
         float height = 5.9f;
 
@@ -74,8 +76,18 @@ public class BossController : MonoBehaviour
         newSpike.transform.Rotate(angleZ - 90, 0, angleX - 90);
     }
 
+    private void LaunchSpike(float speed)
+    {
+        GameObject newSpike = Instantiate(spikeStarter, transform.position + new Vector3(-6f, 1f, 0), transform.localRotation, spikeParent.transform);
+        newSpike.transform.Rotate(90, 0, 0);
+        newSpike.AddComponent<ProjectileController>();
+        newSpike.GetComponent<ProjectileController>().lowerBounds = spikeStarter.GetComponent<ProjectileController>().lowerBounds;
+        newSpike.GetComponent<ProjectileController>().upperBounds = spikeStarter.GetComponent<ProjectileController>().upperBounds;
+        newSpike.GetComponent<Rigidbody>().AddForce(new Vector3(-1, 0, 0) * speed);
+    }
+
     void Attack()
     {
-
+        LaunchSpike(1000f);
     }
 }
