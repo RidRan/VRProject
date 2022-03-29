@@ -12,6 +12,9 @@ public class BossController : MonoBehaviour
 
     int counter = 0;
 
+    public int healthPoints;
+
+
     public GameObject spikeStarter;
     public GameObject spikeParent;
 
