@@ -184,7 +184,6 @@ namespace Valve.VR.InteractionSystem
                 hand.TriggerHapticPulse(collisionStrength);
             }
 			*/
-	 Debug.Log("yo");
 			if (collision.gameObject.CompareTag("Bat"))
             {
                 Debug.Log("here");
