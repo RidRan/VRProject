@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Topping
+  - FxTemporaire
+  - Spike
+  - Sword
   layers:
   - Default
   - TransparentFX
