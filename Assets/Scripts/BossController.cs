@@ -16,12 +16,15 @@ public class BossController : MonoBehaviour
 
 
     public GameObject spikeStarter;
-    public GameObject spikeParent;
+    public GameObject bodySpikes;
+    public GameObject worldSpikes;
 
     public int numSpikes = 1;
 
     public GameObject eyes;
     public float rollSpeed;
+
+    public GameObject alert;
 
     // Start is called before the first frame update
     void Start()
@@ -57,7 +60,7 @@ public class BossController : MonoBehaviour
 
         counter++;
 
-        if (counter % 200 == 0 || counter % 200 == 20 || counter % 1200 == 40)
+        if (counter % 300 == 0 || counter % 300 == 20 || counter % 300 == 40)
         {
             Attack();
         }
@@ -81,22 +84,32 @@ public class BossController : MonoBehaviour
         angleX += 90;
         angleZ += 90;
 
-        GameObject newSpike = Instantiate(spikeStarter, transform.position + height * new Vector3(Sin(angleX) * Cos(angleZ), Sin(angleX) * Sin(angleZ), Cos(angleX)), transform.localRotation, spikeParent.transform);
+        GameObject newSpike = Instantiate(spikeStarter, transform.position + height * new Vector3(Sin(angleX) * Cos(angleZ), Sin(angleX) * Sin(angleZ), Cos(angleX)), transform.localRotation, bodySpikes.transform);
         newSpike.transform.Rotate(angleZ - 90, 0, angleX - 90);
     }
 
     private void LaunchSpike(float speed)
     {
-        GameObject newSpike = Instantiate(spikeStarter, transform.position + new Vector3(-3f, 0f, 0f), transform.localRotation, spikeParent.transform);
+        GameObject newSpike = Instantiate(spikeStarter, transform.position + new Vector3(-3f, Random.Range(-1f, 1f), Random.Range(-.3f, .3f)), transform.localRotation, worldSpikes.transform);
         newSpike.transform.Rotate(90, 0, 0);
+        newSpike.transform.localScale = new Vector3(10f, 10f, 10f);
         newSpike.AddComponent<Rigidbody>();
         newSpike.GetComponent<Rigidbody>().useGravity = false;
         newSpike.AddComponent<SpikeController>();
+        newSpike.GetComponent<SpikeController>().alert = alert;
         newSpike.GetComponent<Rigidbody>().AddForce(new Vector3(-1, 0, 0) * speed);
     }
 
     void Attack()
     {
         LaunchSpike(1000f);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Spike"))
+        {
+            Debug.Log("spike hit fish");
+        }
     }
 }
