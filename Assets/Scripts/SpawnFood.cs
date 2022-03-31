@@ -64,7 +64,7 @@ public class SpawnFood : MonoBehaviour
 
 	public void OnTriggerExit(Collider other)
     {
-        if (!spawning && other.gameObject.CompareTag("Topping"))
+        if (!spawning && (other.gameObject.CompareTag("Topping") || other.gameObject.CompareTag("Rice")))
         {
 			Debug.Log("TExit");
 			StartCoroutine(WaitSpawnFood());
