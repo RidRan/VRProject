@@ -5,9 +5,14 @@ TagManager:
   serializedVersion: 2
   tags:
   - Topping
+  - FxTemporaire
+  - Spike
+  - Sword
+  - Boss
   - Bat
   - FxTemporaire
   - projectile
+  - Rice
   layers:
   - Default
   - TransparentFX
