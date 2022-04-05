@@ -16,6 +16,7 @@ public class BossController : MonoBehaviour
 
 
     public GameObject spikeStarter;
+    public GameObject spikeParent;
 
     public int numSpikes = 1;
 
@@ -25,16 +26,16 @@ public class BossController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        GenerateSpike(0, 0); 
+        GenerateSpike(0, 15);
+        GenerateSpike(15, 0);
+        GenerateSpike(15, 15);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (counter % 100000 == 0)
-        {
-            Attack();
-        }
+        
     }
 
     void FixedUpdate()
@@ -49,10 +50,47 @@ public class BossController : MonoBehaviour
         eyes.transform.Rotate(rollSpeed, 0, 0);
 
         counter++;
+
+        if (counter % 100 == 0 || counter % 100 == 10 || counter % 100 == 20)
+        {
+            Attack();
+        }
+    }
+
+    private float Sin(float angle)
+    {
+        return Mathf.Sin(angle / 180 * Mathf.PI);
+    }
+
+    private float Cos(float angle)
+    {
+        return Mathf.Cos(angle / 180 * Mathf.PI);
+    }
+
+
+    private void GenerateSpike(float angleX, float angleZ)
+    {
+        float height = 5.9f;
+
+        angleX += 90;
+        angleZ += 90;
+
+        GameObject newSpike = Instantiate(spikeStarter, transform.position + height * new Vector3(Sin(angleX) * Cos(angleZ), Sin(angleX) * Sin(angleZ), Cos(angleX)), transform.localRotation, spikeParent.transform);
+        newSpike.transform.Rotate(angleZ - 90, 0, angleX - 90);
+    }
+
+    private void LaunchSpike(float speed)
+    {
+        GameObject newSpike = Instantiate(spikeStarter, transform.position + new Vector3(-6f, 1f, 0), transform.localRotation, spikeParent.transform);
+        newSpike.transform.Rotate(90, 0, 0);
+        newSpike.AddComponent<ProjectileController>();
+        newSpike.GetComponent<ProjectileController>().lowerBounds = spikeStarter.GetComponent<ProjectileController>().lowerBounds;
+        newSpike.GetComponent<ProjectileController>().upperBounds = spikeStarter.GetComponent<ProjectileController>().upperBounds;
+        newSpike.GetComponent<Rigidbody>().AddForce(new Vector3(-1, 0, 0) * speed);
     }
 
     void Attack()
     {
-
+        LaunchSpike(1000f);
     }
 }
