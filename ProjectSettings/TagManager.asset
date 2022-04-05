@@ -9,6 +9,8 @@ TagManager:
   - FxTemporaire
   - projectile
   - Rice
+  - Undefined
+  - Plate
   layers:
   - Default
   - TransparentFX

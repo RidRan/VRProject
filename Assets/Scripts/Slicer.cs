@@ -90,6 +90,9 @@ namespace Assets.Scripts
             MeshCollider meshCollider = refGameObject.GetComponent<MeshCollider>();
             meshCollider.sharedMesh = mesh;
             meshCollider.convex = true;
+            Rigidbody rb = refGameObject.GetComponent<Rigidbody>();
+            rb.useGravity = true;
+            rb.isKinematic = false;
         }
     }
 }
