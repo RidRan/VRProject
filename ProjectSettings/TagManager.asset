@@ -8,6 +8,7 @@ TagManager:
   - Bat
   - FxTemporaire
   - projectile
+  - Rice
   layers:
   - Default
   - TransparentFX
