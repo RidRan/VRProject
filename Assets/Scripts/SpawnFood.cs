@@ -17,6 +17,7 @@ public class SpawnFood : MonoBehaviour
 	public bool sendSpawnMessageToParent = false;
 
 	public float scale = 1f;
+	private bool spawning = false;
 
 	// Start is called before the first frame update
 	void Start()
@@ -57,18 +58,25 @@ public class SpawnFood : MonoBehaviour
 			}
 		}
 
-
+		spawning = false;
 		return food;
 	}
 
-	public void OnTriggerEnter(Collision other)
+	public void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag("Topping"))
+        if (!spawning && (other.gameObject.CompareTag("Topping") || other.gameObject.CompareTag("Rice")))
         {
-			//Debug.Log("here");
-			SpawnAFood();
+			Debug.Log("TExit");
+			StartCoroutine(WaitSpawnFood());
+			spawning = true;
 		}
 		
 	}
+
+	private IEnumerator WaitSpawnFood()
+    {
+		yield return new WaitForSeconds(2);
+		SpawnAFood();
+    }
 
 }
