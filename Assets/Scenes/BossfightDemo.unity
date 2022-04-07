@@ -732,9 +732,57 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 7595c95d370ce2a409002a32b1667e74, type: 2}
+    - target: {fileID: -3435314192731740849, guid: 49585cf728c064b109d472d7a6a52a76, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -3435314192731740849, guid: 49585cf728c064b109d472d7a6a52a76, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3435314192731740849, guid: 49585cf728c064b109d472d7a6a52a76, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3435314192731740849, guid: 49585cf728c064b109d472d7a6a52a76, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3435314192731740849, guid: 49585cf728c064b109d472d7a6a52a76, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3435314192731740849, guid: 49585cf728c064b109d472d7a6a52a76, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 49585cf728c064b109d472d7a6a52a76, type: 3}
       propertyPath: m_Name
       value: PufferFish_Animation02
+      objectReference: {fileID: 0}
+    - target: {fileID: 3720635059137550019, guid: 49585cf728c064b109d472d7a6a52a76, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3720635059137550019, guid: 49585cf728c064b109d472d7a6a52a76, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3720635059137550019, guid: 49585cf728c064b109d472d7a6a52a76, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3720635059137550019, guid: 49585cf728c064b109d472d7a6a52a76, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3720635059137550019, guid: 49585cf728c064b109d472d7a6a52a76, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3720635059137550019, guid: 49585cf728c064b109d472d7a6a52a76, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7373458180661429028, guid: 49585cf728c064b109d472d7a6a52a76, type: 3}
       propertyPath: m_Materials.Array.data[0]
