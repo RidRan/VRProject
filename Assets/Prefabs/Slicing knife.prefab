@@ -721,8 +721,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6399500916546143156}
-  - component: {fileID: 8832074908836118988}
-  - component: {fileID: 8573628059993604227}
+  - component: {fileID: 2680906688073729119}
+  - component: {fileID: 4277089363626365523}
   - component: {fileID: 2662401170647817392}
   m_Layer: 0
   m_Name: Rod
@@ -746,15 +746,15 @@ Transform:
   m_Father: {fileID: 6082220649964296677}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &8832074908836118988
+--- !u!33 &2680906688073729119
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8529616419278926776}
-  m_Mesh: {fileID: -5351219936328299625, guid: 1c1f38858a80ebb4c8480cb31a4167f8, type: 3}
---- !u!23 &8573628059993604227
+  m_Mesh: {fileID: -5351219936328299625, guid: 8a7c7986e0887a049a8a2489f1cd01f9, type: 3}
+--- !u!23 &4277089363626365523
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -773,7 +773,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ec5e0ca593dcf3e439ef863d905cabd4, type: 2}
+  - {fileID: -7893633321660304159, guid: 8a7c7986e0887a049a8a2489f1cd01f9, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
