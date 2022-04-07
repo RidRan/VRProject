@@ -33,6 +33,8 @@ public class SpikeController : MonoBehaviour
         {
             gameObject.GetComponent<Rigidbody>().AddForce(2000f, 0f, 0f);
             gameObject.transform.Rotate(180, 0, 0);
+
+            collision.gameObject.GetComponent<AudioSource>().Play();
         } 
         else if (collision.gameObject.CompareTag("Player"))
         {
