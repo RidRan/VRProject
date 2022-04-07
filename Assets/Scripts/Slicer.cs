@@ -28,17 +28,13 @@ namespace Assets.Scripts
             var a = mesh.GetSubMesh(0);
             Sliceable sliceable = objectToCut.GetComponent<Sliceable>();
 
-            if(sliceable == null)
-            {
-                //throw new NotSupportedException("Cannot slice non sliceable object, add the sliceable script to the object or inherit from sliceable to support slicing");
-            }
-                            //Create left and right slice of hollow object
+            //Create left and right slice of hollow object
             SlicesMetadata slicesMeta = new SlicesMetadata(plane, mesh, sliceable.IsSolid, sliceable.ReverseWireTriangles, sliceable.ShareVertices, sliceable.SmoothVertices);            
 
-            GameObject positiveObject = CreateMeshGameObject(objectToCut);
+            GameObject positiveObject = CreateMeshGameObject(objectToCut, -1f);
             positiveObject.name = string.Format("{0}_positive", objectToCut.name);
 
-            GameObject negativeObject = CreateMeshGameObject(objectToCut);
+            GameObject negativeObject = CreateMeshGameObject(objectToCut, 1f);
             negativeObject.name = string.Format("{0}_negative", objectToCut.name);
 
             var positiveSideMeshData = slicesMeta.PositiveSideMesh;
@@ -59,7 +55,7 @@ namespace Assets.Scripts
         /// </summary>
         /// <param name="originalObject">The original object.</param>
         /// <returns></returns>
-        private GameObject CreateMeshGameObject(GameObject originalObject)
+        private GameObject CreateMeshGameObject(GameObject originalObject, float direction)
         {
             var originalMaterial = originalObject.GetComponent<MeshRenderer>().materials;
 
@@ -69,10 +65,9 @@ namespace Assets.Scripts
 
             meshGameObject.transform.localScale = originalObject.transform.localScale;
             meshGameObject.transform.rotation = originalObject.transform.rotation;
-            meshGameObject.transform.position = originalObject.transform.position;
+            meshGameObject.transform.position = new Vector3(originalObject.transform.position.x + (.1f* direction), originalObject.transform.position.y, originalObject.transform.position.z);
 
             meshGameObject.tag = originalObject.tag;
-
 
             //meshGameObject.AddComponent<Interactable>();
             //meshGameObject.AddComponent<Throwable>();
