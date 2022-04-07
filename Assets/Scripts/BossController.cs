@@ -14,10 +14,11 @@ public class BossController : MonoBehaviour
 
     public int healthPoints;
 
-
     public GameObject spikeStarter;
     public GameObject bodySpikes;
     public GameObject worldSpikes;
+
+    public GameObject glob;
 
     public int numSpikes = 1;
 
@@ -26,6 +27,21 @@ public class BossController : MonoBehaviour
 
     public GameObject alert;
 
+    public GameObject leftEye;
+    public GameObject rightEye;
+
+    public AudioClip hurt;
+    public AudioClip roar;
+    public AudioClip shootSpike;
+    public AudioClip shootGlob;
+
+    public float eyeSpeed;
+
+    private Vector3 leftEyeTarget;
+    private Vector3 rightEyeTarget;
+
+    public GameObject target;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,7 +49,11 @@ public class BossController : MonoBehaviour
         {
             for (int j = 0; j < 180; j += 30)
             {
-                if (i != 90 && i != 270)
+                if (i != 90 && i != 270 && 
+                    !(i == 30 && j == 60) &&
+                    !(i == 210 && j == 60) &&
+                    !(i == 0 && j == 60) &&
+                    !(i == 0 && j == 90))
                 {
                     GenerateSpike(i, j);
                 }
@@ -56,7 +76,7 @@ public class BossController : MonoBehaviour
         float floatValue = floatScale * Mathf.Sin(counter * floatSpeed);
         transform.position = new Vector3(transform.position.x, transform.position.y + floatValue, transform.position.z);
 
-        //eyes.transform.Rotate(rollSpeed, 0, 0);
+        
 
         counter++;
 
