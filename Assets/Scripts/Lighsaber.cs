@@ -35,7 +35,7 @@ public class Lighsaber : MonoBehaviour
 
     [SerializeField]
     [Tooltip("The amount of force applied to each side of a slice")]
-    private float _forceAppliedToCut = 3f;
+    private float _forceAppliedToCut = 0f;
 
     private Mesh _mesh;
     private Vector3[] _vertices;
@@ -159,8 +159,7 @@ public class Lighsaber : MonoBehaviour
 
         if(sliceable != null)
         {
-            GameObject[] slices = Slicer.Slice(plane, other.gameObject);
-            Debug.Log("here");
+            GameObject[] slices = Slicer.instance.Slice(plane, other.gameObject);
             Destroy(other.gameObject);
 
             Rigidbody rigidbody = slices[1].GetComponent<Rigidbody>();
