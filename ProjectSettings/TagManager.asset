@@ -15,6 +15,7 @@ TagManager:
   - Rice
   - Undefined
   - Plate
+  - Ticket
   layers:
   - Default
   - TransparentFX
