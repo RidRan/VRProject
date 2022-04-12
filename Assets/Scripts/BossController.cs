@@ -27,16 +27,14 @@ public class BossController : MonoBehaviour
 
     public GameObject alert;
 
-    public GameObject leftEye;
-    public GameObject rightEye;
-
     public AudioClip hurt;
     public AudioClip roar;
     public AudioClip shootSpike;
     public AudioClip shootGlob;
 
     public float eyeSpeed;
-
+    public GameObject leftEye;
+    public GameObject rightEye;
     private Vector3 leftEyeTarget;
     private Vector3 rightEyeTarget;
 
@@ -51,7 +49,7 @@ public class BossController : MonoBehaviour
             {
                 if (i != 90 && i != 270 && 
                     !(i == 30 && j == 60) &&
-                    !(i == 210 && j == 60) &&
+                    !(i == 330 && j == 60) &&
                     !(i == 0 && j == 60) &&
                     !(i == 0 && j == 90))
                 {
@@ -76,7 +74,7 @@ public class BossController : MonoBehaviour
         float floatValue = floatScale * Mathf.Sin(counter * floatSpeed);
         transform.position = new Vector3(transform.position.x, transform.position.y + floatValue, transform.position.z);
 
-        
+        TargetEyes();
 
         counter++;
 
@@ -96,6 +94,10 @@ public class BossController : MonoBehaviour
         return Mathf.Cos(angle / 180 * Mathf.PI);
     }
 
+    private float Atan(float oa)
+    {
+        return Mathf.Atan(oa) * 180 / Mathf.PI;
+    }
 
     private void GenerateSpike(float angleX, float angleZ)
     {
@@ -118,6 +120,42 @@ public class BossController : MonoBehaviour
         newSpike.AddComponent<SpikeController>();
         newSpike.GetComponent<SpikeController>().alert = alert;
         newSpike.GetComponent<Rigidbody>().AddForce(new Vector3(-1, 0, 0) * speed);
+    }
+
+    void TargetEyes()
+    {
+        Vector3 rotation = new Vector3();
+        Vector3 targetPosition = target.transform.position;
+
+        Vector3 leftEyeRotation = leftEye.transform.localEulerAngles;
+        Vector3 leftEyePosition = leftEye.transform.position;
+
+        Debug.Log("Current target position: " + targetPosition);
+
+        float xa = -Atan((targetPosition.x - leftEyePosition.x) / (targetPosition.y - leftEyePosition.y));
+        float za = Atan((targetPosition.z - leftEyePosition.z) / (targetPosition.x - leftEyePosition.x));
+
+        leftEyeTarget = new Vector3(
+            (xa < 0) ? xa + 180 : xa,
+            0,
+            za
+            );
+
+        leftEye.transform.localEulerAngles = leftEyeTarget;
+
+        Vector3 rightEyeRotation = rightEye.transform.localEulerAngles;
+        Vector3 rightEyePosition = rightEye.transform.position;
+
+        xa = -Atan((targetPosition.x - rightEyePosition.x) / (targetPosition.y - rightEyePosition.y));
+        za = Atan((targetPosition.z - rightEyePosition.z) / (targetPosition.x - rightEyePosition.x));
+
+        rightEyeTarget = new Vector3(
+            (xa < 0) ? xa + 180 : xa,
+            0,
+            za
+            );
+
+        rightEye.transform.localEulerAngles = rightEyeTarget;
     }
 
     void Attack()
