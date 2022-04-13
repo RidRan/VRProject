@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class BossController : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class BossController : MonoBehaviour
 
     int counter = 0;
 
-    public int healthPoints;
+    public float health;
 
     public GameObject spikeStarter;
     public GameObject bodySpikes;
@@ -32,13 +33,15 @@ public class BossController : MonoBehaviour
     public AudioClip shootSpike;
     public AudioClip shootGlob;
 
+    public float moveSpeed;
+
     public float eyeSpeed;
     public GameObject leftEye;
     public GameObject rightEye;
-    private Vector3 leftEyeTarget;
-    private Vector3 rightEyeTarget;
 
     public GameObject target;
+
+    public TextMeshProUGUI healthText;
 
     // Start is called before the first frame update
     void Start()
@@ -74,7 +77,7 @@ public class BossController : MonoBehaviour
         float floatValue = floatScale * Mathf.Sin(counter * floatSpeed);
         transform.position = new Vector3(transform.position.x, transform.position.y + floatValue, transform.position.z);
 
-        TargetEyes();
+        TargetPlayer();
 
         counter++;
 
@@ -101,20 +104,25 @@ public class BossController : MonoBehaviour
 
     private void GenerateSpike(float angleX, float angleZ)
     {
-        float height = 2.85f;
+        float spikeScale = 2f;
+        float height = 10f;
 
         angleX += 90;
         angleZ += 90;
 
         GameObject newSpike = Instantiate(spikeStarter, transform.position + height * new Vector3(Sin(angleX) * Cos(angleZ), Sin(angleX) * Sin(angleZ), Cos(angleX)), transform.localRotation, bodySpikes.transform);
+        newSpike.transform.localScale = new Vector3(spikeScale, spikeScale, spikeScale);
         newSpike.transform.Rotate(angleZ - 90, 0, angleX - 90);
     }
 
     private void LaunchSpike(float speed)
     {
-        GameObject newSpike = Instantiate(spikeStarter, transform.position + new Vector3(-3f, Random.Range(-1f, 1f), Random.Range(-.3f, .3f)), transform.localRotation, worldSpikes.transform);
+        GetComponent<AudioSource>().PlayOneShot(shootSpike);
+
+        GameObject newSpike = Instantiate(spikeStarter, transform.position + new Vector3(-10f, Random.Range(-1f, 1f), Random.Range(-.3f, .3f)), transform.localRotation, worldSpikes.transform);
         newSpike.transform.Rotate(90, 0, 0);
-        newSpike.transform.localScale = new Vector3(10f, 10f, 10f);
+        float spikeScale = 50f;
+        newSpike.transform.localScale = new Vector3(spikeScale, spikeScale, spikeScale);
         newSpike.AddComponent<Rigidbody>();
         newSpike.GetComponent<Rigidbody>().useGravity = false;
         newSpike.AddComponent<SpikeController>();
@@ -122,40 +130,44 @@ public class BossController : MonoBehaviour
         newSpike.GetComponent<Rigidbody>().AddForce(new Vector3(-1, 0, 0) * speed);
     }
 
-    void TargetEyes()
+    void TargetPlayer()
     {
-        Vector3 rotation = new Vector3();
         Vector3 targetPosition = target.transform.position;
 
-        Vector3 leftEyeRotation = leftEye.transform.localEulerAngles;
         Vector3 leftEyePosition = leftEye.transform.position;
-
-        Debug.Log("Current target position: " + targetPosition);
+        Vector3 leftEyeRotation = leftEye.transform.localEulerAngles;
 
         float xa = -Atan((targetPosition.x - leftEyePosition.x) / (targetPosition.y - leftEyePosition.y));
         float za = Atan((targetPosition.z - leftEyePosition.z) / (targetPosition.x - leftEyePosition.x));
 
-        leftEyeTarget = new Vector3(
+        Vector3 leftEyeTarget = new Vector3(
             (xa < 0) ? xa + 180 : xa,
             0,
             za
             );
 
-        leftEye.transform.localEulerAngles = leftEyeTarget;
+        leftEyeRotation = new Vector3(leftEyeRotation.x, 0, leftEyeRotation.y - 180);
+        leftEye.transform.localEulerAngles = leftEyeRotation + (leftEyeTarget - leftEyeRotation) * eyeSpeed;
 
-        Vector3 rightEyeRotation = rightEye.transform.localEulerAngles;
         Vector3 rightEyePosition = rightEye.transform.position;
+        Vector3 rightEyeRotation = rightEye.transform.localEulerAngles;
 
         xa = -Atan((targetPosition.x - rightEyePosition.x) / (targetPosition.y - rightEyePosition.y));
         za = Atan((targetPosition.z - rightEyePosition.z) / (targetPosition.x - rightEyePosition.x));
 
-        rightEyeTarget = new Vector3(
+        Vector3 rightEyeTarget = new Vector3(
             (xa < 0) ? xa + 180 : xa,
             0,
             za
             );
 
-        rightEye.transform.localEulerAngles = rightEyeTarget;
+        rightEyeRotation = new Vector3(rightEyeRotation.x, 0, rightEyeRotation.y - 180);
+        rightEye.transform.localEulerAngles = rightEyeRotation + (rightEyeTarget - rightEyeRotation) * eyeSpeed;
+
+        Vector3 position = transform.position;
+        Vector3 rotation = transform.localEulerAngles;
+
+
     }
 
     void Attack()

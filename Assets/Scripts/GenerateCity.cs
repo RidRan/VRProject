@@ -8,8 +8,6 @@ public class GenerateCity : MonoBehaviour
 
     public int numSections;
 
-    public GameObject boss;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -30,7 +28,5 @@ public class GenerateCity : MonoBehaviour
             GameObject newSection = Instantiate(starterSection, new Vector3(transform.position.x + 30 * i, transform.position.y, transform.position.z), starterSection.transform.localRotation, transform);
         }
         Destroy(starterSection);
-
-        boss.transform.position = new Vector3((numSections - 1) * 30, boss.transform.position.y, boss.transform.position.z);
     }
 }
