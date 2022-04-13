@@ -16,7 +16,7 @@ public class SpawnFood : MonoBehaviour
 
 	public bool sendSpawnMessageToParent = false;
 
-	public float scale = 1f;
+	public float scale;
 	private bool spawning = false;
 
 	// Start is called before the first frame update
@@ -64,9 +64,8 @@ public class SpawnFood : MonoBehaviour
 
 	public void OnTriggerExit(Collider other)
     {
-        if (!spawning && (other.gameObject.CompareTag("Topping") || other.gameObject.CompareTag("Rice")))
+        if (!spawning && (other.gameObject.CompareTag("Topping") || other.gameObject.CompareTag("Rice") || other.gameObject.CompareTag("Plate")))
         {
-			Debug.Log("TExit");
 			StartCoroutine(WaitSpawnFood());
 			spawning = true;
 		}
