@@ -167,12 +167,22 @@ public class BossController : MonoBehaviour
         Vector3 position = transform.position;
         Vector3 rotation = transform.localEulerAngles;
 
+        xa = Atan((targetPosition.y - position.y) / (targetPosition.x - position.x));
+        float ya = -Atan((targetPosition.z - position.z) / (targetPosition.x - position.x)) - 90;
 
+        Vector3 bodyTarget = new Vector3(
+            xa,
+            ya,
+            0
+            );
+
+        rotation = new Vector3(rotation.x, rotation.y, 0);
+        transform.localEulerAngles = rotation + (bodyTarget - rotation) * moveSpeed;
     }
 
     void Attack()
     {
-        LaunchSpike(1000f);
+        //LaunchSpike(1000f);
     }
 
     private void OnCollisionEnter(Collision collision)
