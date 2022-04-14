@@ -8425,7 +8425,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inflateSpeed: 0.01
-  moveSpeed: 1
+  moveSpeed: 0.01
+  turnSpeed: 1
   maxHealth: 100
   spikeDamage: 5
   spikeStarter: {fileID: 6595527450889523372, guid: c2f4fa6ffcd2e95489dd91cb630b8c07, type: 3}
@@ -9245,7 +9246,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6494702746707530150, guid: 6cb830339ff38ec429f1e181aeec3523, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4.41
+      value: -4.62
       objectReference: {fileID: 0}
     - target: {fileID: 6494702746707530150, guid: 6cb830339ff38ec429f1e181aeec3523, type: 3}
       propertyPath: m_LocalRotation.w

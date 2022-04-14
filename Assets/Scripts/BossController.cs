@@ -10,6 +10,7 @@ public class BossController : MonoBehaviour
     private float inflateTarget = 1f;
 
     public float moveSpeed;
+    public float turnSpeed;
     private float moveTarget;
 
     int counter = 0;
@@ -43,6 +44,10 @@ public class BossController : MonoBehaviour
 
     private int hit = -1;
 
+    private int attackMode = -1;
+
+    private Vector3 startScale;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -62,7 +67,8 @@ public class BossController : MonoBehaviour
         }
 
         currentHealth = maxHealth;
-        moveTarget = transform.position.y;
+        moveTarget = transform.position.y + 10f;
+        startScale = transform.localScale;
     }
 
     // Update is called once per frame
@@ -73,14 +79,29 @@ public class BossController : MonoBehaviour
 
     void FixedUpdate()
     {
-        
+        if (transform.position.y < moveTarget)
+        {
+            transform.position = transform.position + new Vector3(0, moveSpeed, 0);
+        }
+        else if (transform.position.y > moveTarget)
+        {
+            transform.position = transform.position - new Vector3(0, moveSpeed, 0);
+        }
 
+        if (transform.localScale.x > startScale.x)
+        {
+            transform.localScale = transform.localScale * (1f - inflateSpeed);
+        }
+        
         TargetPlayer();
 
         counter++;
 
         if (counter % 300 == 0)
         {
+            moveTarget += attackMode * 10f;
+            attackMode *= -1;
+            transform.localScale = startScale * 1.5f;
             Attack();
         }
     }
@@ -117,7 +138,7 @@ public class BossController : MonoBehaviour
     {
         GetComponent<AudioSource>().PlayOneShot(shootSpike);
 
-        float forwardOffset = -transform.localScale.x;
+        float forwardOffset = -transform.localScale.x * .75f;
         Debug.Log(forwardOffset);
 
         GameObject newSpike = Instantiate(spikeStarter, transform.position + new Vector3(forwardOffset, -2f, 0f), transform.localRotation, worldSpikes.transform);
@@ -131,9 +152,9 @@ public class BossController : MonoBehaviour
         Vector3 spikePosition = newSpike.transform.position;
 
         newSpike.transform.localEulerAngles = new Vector3(
-            Atan((targetPosition.x - spikePosition.x) / (targetPosition.y - spikePosition.y)) + 180,
             0,
-            Atan((targetPosition.z - spikePosition.z) / (targetPosition.x - spikePosition.x)) + 90
+            0,
+            -Atan((targetPosition.x - spikePosition.x) / (targetPosition.y - spikePosition.y)) + 180
             );
 
         newSpike.AddComponent<Rigidbody>();
@@ -188,7 +209,7 @@ public class BossController : MonoBehaviour
             );
 
         rotation = new Vector3(rotation.x, rotation.y, 0);
-        transform.localEulerAngles = rotation + (bodyTarget - rotation) * moveSpeed;
+        transform.localEulerAngles = rotation + (bodyTarget - rotation) * turnSpeed;
     }
 
     void Attack()
