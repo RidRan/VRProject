@@ -1621,7 +1621,7 @@ MonoBehaviour:
   inflateScale: 0.003
   floatSpeed: 0.0002
   floatScale: 0.0002
-  healthPoints: 0
+  health: 0
   spikeStarter: {fileID: 6595527450889523372, guid: c2f4fa6ffcd2e95489dd91cb630b8c07, type: 3}
   bodySpikes: {fileID: 573864238}
   worldSpikes: {fileID: 245996956}
