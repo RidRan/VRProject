@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: -78596493804746106}
   - component: {fileID: 715600281516996785}
   - component: {fileID: 688392370441492603}
+  - component: {fileID: 8000991891810472925}
   m_Layer: 0
   m_Name: Plate_Square
   m_TagString: Plate
@@ -235,3 +236,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hand: {fileID: 0}
+--- !u!114 &8000991891810472925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 742722032635388008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7649d9f9dd41384e852b885a6791d3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hand: {fileID: 0}
+  tag: Rice
