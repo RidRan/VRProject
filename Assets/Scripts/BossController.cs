@@ -141,7 +141,7 @@ public class BossController : MonoBehaviour
         float forwardOffset = -transform.localScale.x * .75f;
         Debug.Log(forwardOffset);
 
-        GameObject newSpike = Instantiate(spikeStarter, transform.position + new Vector3(forwardOffset, -2f, 0f), transform.localRotation, worldSpikes.transform);
+        GameObject newSpike = Instantiate(spikeStarter, transform.position + new Vector3(forwardOffset, -3f, 0f), transform.localRotation, worldSpikes.transform);
         float spikeScale = 50f;
         newSpike.transform.localScale = new Vector3(spikeScale, spikeScale, spikeScale);
         newSpike.AddComponent<SpikeController>();
@@ -231,7 +231,9 @@ public class BossController : MonoBehaviour
         leftEye.GetComponent<MeshRenderer>().materials[0].color = eyeColor;
         rightEye.GetComponent<MeshRenderer>().materials[0].color = eyeColor;
 
-        Puff(1.0f);
+        startScale *= 1.1f;
+
+        eyeSpeed *= .5f;
     }
 
     private void Puff(float scale)

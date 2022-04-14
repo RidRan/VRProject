@@ -67,7 +67,7 @@ public class SpikeController : MonoBehaviour
         {
             boss.GetComponent<BossController>().OnHit();
 
-            //Destroy(gameObject);
+            Destroy(gameObject);
         }
     }
 }
