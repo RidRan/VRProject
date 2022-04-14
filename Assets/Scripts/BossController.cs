@@ -5,15 +5,19 @@ using TMPro;
 
 public class BossController : MonoBehaviour
 {
-    public float inflateSpeed = 1;
-    public float inflateScale = 1;
+    private float currentInflate = 1f;
+    public float inflateSpeed = .01f;
+    private float inflateTarget = 1f;
 
-    public float floatSpeed = 1;
-    public float floatScale = 1;
+    public float moveSpeed;
+    public float turnSpeed;
+    private float moveTarget;
 
     int counter = 0;
 
-    public float health;
+    public float maxHealth;
+    private float currentHealth;
+    public float spikeDamage;
 
     public GameObject spikeStarter;
     public GameObject bodySpikes;
@@ -27,9 +31,7 @@ public class BossController : MonoBehaviour
     public AudioClip roar;
     public AudioClip shootSpike;
     public AudioClip shootGlob;
-
-    public float moveSpeed;
-
+    
     public float eyeSpeed;
     public GameObject leftEye;
     public GameObject rightEye;
@@ -39,6 +41,12 @@ public class BossController : MonoBehaviour
     public TextMeshProUGUI healthText;
 
     public float spikeSpeed;
+
+    private int hit = -1;
+
+    private int attackMode = -1;
+
+    private Vector3 startScale;
 
     // Start is called before the first frame update
     void Start()
@@ -57,6 +65,10 @@ public class BossController : MonoBehaviour
                 }
             }
         }
+
+        currentHealth = maxHealth;
+        moveTarget = transform.position.y + 10f;
+        startScale = transform.localScale;
     }
 
     // Update is called once per frame
@@ -67,19 +79,29 @@ public class BossController : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector3 currentScale = transform.localScale;
-        float inflateValue = inflateScale * Mathf.Sin(counter * inflateSpeed);
-        transform.localScale = new Vector3(currentScale.x + inflateValue, currentScale.x + inflateValue, currentScale.z + inflateValue);
+        if (transform.position.y < moveTarget)
+        {
+            transform.position = transform.position + new Vector3(0, moveSpeed, 0);
+        }
+        else if (transform.position.y > moveTarget)
+        {
+            transform.position = transform.position - new Vector3(0, moveSpeed, 0);
+        }
 
-        float floatValue = floatScale * Mathf.Sin(counter * floatSpeed);
-        transform.position = new Vector3(transform.position.x, transform.position.y + floatValue, transform.position.z);
-
+        if (transform.localScale.x > startScale.x)
+        {
+            transform.localScale = transform.localScale * (1f - inflateSpeed);
+        }
+        
         TargetPlayer();
 
         counter++;
 
         if (counter % 300 == 0)
         {
+            moveTarget += attackMode * 10f;
+            attackMode *= -1;
+            transform.localScale = startScale * 1.5f;
             Attack();
         }
     }
@@ -116,7 +138,10 @@ public class BossController : MonoBehaviour
     {
         GetComponent<AudioSource>().PlayOneShot(shootSpike);
 
-        GameObject newSpike = Instantiate(spikeStarter, transform.position + new Vector3(-20f, 0f, 0f), transform.localRotation, worldSpikes.transform);
+        float forwardOffset = -transform.localScale.x * .75f;
+        Debug.Log(forwardOffset);
+
+        GameObject newSpike = Instantiate(spikeStarter, transform.position + new Vector3(forwardOffset, -2f, 0f), transform.localRotation, worldSpikes.transform);
         float spikeScale = 50f;
         newSpike.transform.localScale = new Vector3(spikeScale, spikeScale, spikeScale);
         newSpike.AddComponent<SpikeController>();
@@ -127,9 +152,9 @@ public class BossController : MonoBehaviour
         Vector3 spikePosition = newSpike.transform.position;
 
         newSpike.transform.localEulerAngles = new Vector3(
-            Atan((targetPosition.y - spikePosition.y) / (targetPosition.x - spikePosition.x)),
             0,
-            90 - Atan((targetPosition.z - spikePosition.z) / (targetPosition.x - spikePosition.x))
+            0,
+            -Atan((targetPosition.x - spikePosition.x) / (targetPosition.y - spikePosition.y)) + 180
             );
 
         newSpike.AddComponent<Rigidbody>();
@@ -184,7 +209,7 @@ public class BossController : MonoBehaviour
             );
 
         rotation = new Vector3(rotation.x, rotation.y, 0);
-        transform.localEulerAngles = rotation + (bodyTarget - rotation) * moveSpeed;
+        transform.localEulerAngles = rotation + (bodyTarget - rotation) * turnSpeed;
     }
 
     void Attack()
@@ -192,11 +217,26 @@ public class BossController : MonoBehaviour
         LaunchSpike();
     }
 
-    private void OnCollisionEnter(Collision collision)
+    float DamageValue() {
+        return ((maxHealth - currentHealth) / maxHealth < 0) ? 0 : (maxHealth - currentHealth) / maxHealth; 
+    }
+
+    public void OnHit()
     {
-        if (collision.gameObject.CompareTag("Spike"))
-        {
-            Debug.Log("spike hit fish");
-        }
+        GetComponent<AudioSource>().PlayOneShot(hurt);
+
+        currentHealth -= spikeDamage;
+        Color eyeColor = new Color(1, 1 - DamageValue(), 1 - DamageValue());
+        Debug.Log(eyeColor);
+        leftEye.GetComponent<MeshRenderer>().materials[0].color = eyeColor;
+        rightEye.GetComponent<MeshRenderer>().materials[0].color = eyeColor;
+
+        Puff(1.0f);
+    }
+
+    private void Puff(float scale)
+    {
+
+        transform.localScale = transform.localScale * (scale);
     }
 }
