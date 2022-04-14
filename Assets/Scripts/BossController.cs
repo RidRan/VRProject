@@ -23,11 +23,6 @@ public class BossController : MonoBehaviour
 
     public int numSpikes = 1;
 
-    public GameObject eyes;
-    public float rollSpeed;
-
-    public GameObject alert;
-
     public AudioClip hurt;
     public AudioClip roar;
     public AudioClip shootSpike;
@@ -42,6 +37,8 @@ public class BossController : MonoBehaviour
     public GameObject target;
 
     public TextMeshProUGUI healthText;
+
+    public float spikeSpeed;
 
     // Start is called before the first frame update
     void Start()
@@ -81,7 +78,7 @@ public class BossController : MonoBehaviour
 
         counter++;
 
-        if (counter % 300 == 0 || counter % 300 == 20 || counter % 300 == 40)
+        if (counter % 300 == 0)
         {
             Attack();
         }
@@ -115,19 +112,29 @@ public class BossController : MonoBehaviour
         newSpike.transform.Rotate(angleZ - 90, 0, angleX - 90);
     }
 
-    private void LaunchSpike(float speed)
+    private void LaunchSpike()
     {
         GetComponent<AudioSource>().PlayOneShot(shootSpike);
 
-        GameObject newSpike = Instantiate(spikeStarter, transform.position + new Vector3(-10f, Random.Range(-1f, 1f), Random.Range(-.3f, .3f)), transform.localRotation, worldSpikes.transform);
-        newSpike.transform.Rotate(90, 0, 0);
+        GameObject newSpike = Instantiate(spikeStarter, transform.position + new Vector3(-20f, 0f, 0f), transform.localRotation, worldSpikes.transform);
         float spikeScale = 50f;
         newSpike.transform.localScale = new Vector3(spikeScale, spikeScale, spikeScale);
+        newSpike.AddComponent<SpikeController>();
+        newSpike.GetComponent<SpikeController>().target = target;
+        newSpike.GetComponent<SpikeController>().boss = gameObject;
+
+        Vector3 targetPosition = target.transform.position;
+        Vector3 spikePosition = newSpike.transform.position;
+
+        newSpike.transform.localEulerAngles = new Vector3(
+            Atan((targetPosition.y - spikePosition.y) / (targetPosition.x - spikePosition.x)),
+            0,
+            90 - Atan((targetPosition.z - spikePosition.z) / (targetPosition.x - spikePosition.x))
+            );
+
         newSpike.AddComponent<Rigidbody>();
         newSpike.GetComponent<Rigidbody>().useGravity = false;
-        newSpike.AddComponent<SpikeController>();
-        newSpike.GetComponent<SpikeController>().alert = alert;
-        newSpike.GetComponent<Rigidbody>().AddForce(new Vector3(-1, 0, 0) * speed);
+        newSpike.GetComponent<Rigidbody>().AddForce((targetPosition - spikePosition) * spikeSpeed);
     }
 
     void TargetPlayer()
@@ -167,7 +174,7 @@ public class BossController : MonoBehaviour
         Vector3 position = transform.position;
         Vector3 rotation = transform.localEulerAngles;
 
-        xa = Atan((targetPosition.y - position.y) / (targetPosition.x - position.x));
+        xa = Atan((targetPosition.y - position.y) / (targetPosition.x - position.x)) + 10;
         float ya = -Atan((targetPosition.z - position.z) / (targetPosition.x - position.x)) - 90;
 
         Vector3 bodyTarget = new Vector3(
@@ -182,7 +189,7 @@ public class BossController : MonoBehaviour
 
     void Attack()
     {
-        //LaunchSpike(1000f);
+        LaunchSpike();
     }
 
     private void OnCollisionEnter(Collision collision)
