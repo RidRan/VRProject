@@ -1,33 +1,47 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+
+
+[Serializable]
+public class Order
+{
+    public Sprite image;
+    public int amount;
+}
 
 public class CreateTicket : MonoBehaviour
 {
-    /*
-    public Dictionary < int, Image > setFoPics = new Dictionary < string, Image > ();
+    [SerializeField] private List<Order> orders;
+    public Image sceneImage1;
+    public Text sceneQnt1;
+    public Image sceneImage2;
+    public Text sceneQnt2;
 
-    public class Order
+
+    private void Start()
     {
-        public Image picture;
-        public int amount;
-        
-        public createOrder(Image pic, int amt)
+        createOrder();
+    }
+
+    public void createOrder()
+    {
+        Order ticket1 = CreateATicket();
+        sceneImage1.sprite = ticket1.image;
+        sceneQnt1.text = "x" + ticket1.amount.ToString();
+        if(UnityEngine.Random.Range(1, 100) <= 35)
         {
-            picture = pic;
-            amount = amt;
+            Order ticket2 = CreateATicket();
+            sceneImage2.sprite = ticket2.image;
+            sceneQnt2.text = "x" + ticket2.amount.ToString();
         }
     }
 
-    public void createATicket()
-    {
-        int setNumber = Random.Range(0, sizeof(setFoPics));
-        int qnt = Random.Range(1, 3);
-
-       Order newOrder =  createOrder(setFoPics[setNumber], qnt);
-
-        //return new GameObject joe;
-
+    public Order CreateATicket() { 
+        return orders[UnityEngine.Random.Range(0, orders.Count)];
     }
-    */
+
 }
