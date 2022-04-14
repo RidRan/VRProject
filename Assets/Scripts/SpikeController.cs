@@ -7,12 +7,16 @@ public class SpikeController : MonoBehaviour
     public Vector3 lowerBounds;
     public Vector3 upperBounds;
 
-    public GameObject alert;
-    int alertedTime = -1;
-    public int alertDelay = 10;
+    public GameObject target;
+    public GameObject boss;
+    public float speed;
 
     // Start is called before the first frame update
     void Start()
+    {
+        
+    }
+    private void Awake()
     {
         
     }
@@ -20,31 +24,49 @@ public class SpikeController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (alertedTime != -1 && Time.frameCount > alertedTime + alertDelay)
-        {
-            alert.SetActive(false);
-            alertedTime = -1;
-        }
+
+    }
+
+    private void FixedUpdate()
+    {
+
+
+    }
+
+    private float Atan(float oa)
+    {
+        return Mathf.Atan(oa) * 180 / Mathf.PI;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
+        Debug.Log("Collided with " + collision.gameObject.tag);
+
         if (collision.gameObject.CompareTag("Sword"))
         {
-            gameObject.GetComponent<Rigidbody>().AddForce(2000f, 0f, 0f);
-            gameObject.transform.Rotate(180, 0, 0);
+            target = boss;
+
+            Vector3 targetPosition = target.transform.position;
+            Vector3 spikePosition = transform.position;
+
+            transform.localEulerAngles = new Vector3(
+                Atan((targetPosition.y - spikePosition.y) / (targetPosition.x - spikePosition.x)),
+                0,
+                90 - Atan((targetPosition.z - spikePosition.z) / (targetPosition.x - spikePosition.x))
+                );
+
+            GetComponent<Rigidbody>().velocity = GetComponent<Rigidbody>().velocity * -2f;
+            GetComponent<Rigidbody>().useGravity = true;
+
+            collision.gameObject.GetComponent<SwordController>().PlayClang();
         } 
         else if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Hit player!");
-            alert.SetActive(true);
-            alertedTime = Time.frameCount;
-            GetComponent<Rigidbody>().useGravity = true;
+            Destroy(gameObject);
         }
         else if (collision.gameObject.CompareTag("Boss"))
         {
-            Debug.Log("Hit puffer!");
-            //GetComponent<Rigidbody>().useGravity = true;
+            Destroy(gameObject);
         }
     }
 }

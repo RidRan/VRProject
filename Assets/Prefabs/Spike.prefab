@@ -195,6 +195,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: spike_1
       objectReference: {fileID: 0}
+    - target: {fileID: 5060987791348385807, guid: 7238460bd3b18456bbbff1638e0271e7, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7595c95d370ce2a409002a32b1667e74, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7238460bd3b18456bbbff1638e0271e7, type: 3}
 --- !u!4 &6606442336136775239 stripped
