@@ -231,9 +231,17 @@ public class BossController : MonoBehaviour
         leftEye.GetComponent<MeshRenderer>().materials[0].color = eyeColor;
         rightEye.GetComponent<MeshRenderer>().materials[0].color = eyeColor;
 
-        startScale *= 1.1f;
+        startScale *= 1.025f;
 
-        eyeSpeed *= .5f;
+        eyeSpeed *= .8f;
+
+        if (DamageValue() == 0)
+        {
+            Debug.Log("Fish dead");
+            startScale *= .01f;
+            inflateSpeed *= 10f;
+        }
+        
     }
 
     private void Puff(float scale)
