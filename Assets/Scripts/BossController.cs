@@ -38,8 +38,6 @@ public class BossController : MonoBehaviour
 
     public GameObject target;
 
-    public TextMeshProUGUI healthText;
-
     public float spikeSpeed;
 
     private int hit = -1;
@@ -49,6 +47,8 @@ public class BossController : MonoBehaviour
     private Vector3 startScale;
 
     public Animator animator;
+
+    public GameObject SpikeSpawnPoint;
 
     // Start is called before the first frame update
     void Start()
@@ -144,7 +144,7 @@ public class BossController : MonoBehaviour
         float forwardOffset = -transform.localScale.x * .75f;
         Debug.Log(forwardOffset);
 
-        GameObject newSpike = Instantiate(spikeStarter, transform.position + new Vector3(forwardOffset, -3f, 0f), transform.localRotation, worldSpikes.transform);
+        GameObject newSpike = Instantiate(spikeStarter, SpikeSpawnPoint.transform.position, transform.localRotation, worldSpikes.transform);
         float spikeScale = 50f;
         newSpike.transform.localScale = new Vector3(spikeScale, spikeScale, spikeScale);
         newSpike.AddComponent<SpikeController>();
