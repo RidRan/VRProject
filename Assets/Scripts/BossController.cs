@@ -48,6 +48,8 @@ public class BossController : MonoBehaviour
 
     private Vector3 startScale;
 
+    public Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -59,7 +61,8 @@ public class BossController : MonoBehaviour
                     !(i == 30 && j == 60) &&
                     !(i == 330 && j == 60) &&
                     !(i == 0 && j == 60) &&
-                    !(i == 0 && j == 90))
+                    !(i == 0 && j == 90) &&
+                    !(i == 180 && j == 60))
                 {
                     GenerateSpike(i, j);
                 }
