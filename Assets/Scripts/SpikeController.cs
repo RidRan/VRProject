@@ -29,8 +29,7 @@ public class SpikeController : MonoBehaviour
 
     private void FixedUpdate()
     {
-
-
+        
     }
 
     private float Atan(float oa)
@@ -66,6 +65,8 @@ public class SpikeController : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Boss"))
         {
+            boss.GetComponent<BossController>().OnHit();
+
             Destroy(gameObject);
         }
     }
