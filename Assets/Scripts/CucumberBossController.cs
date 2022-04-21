@@ -16,7 +16,6 @@ public class CucumberBossController : MonoBehaviour
     public GameObject cucumberStarter;
     public GameObject worldCucumber;
 
-    public int numSpikes = 1;
 
     public GameObject alert;
 
@@ -62,12 +61,12 @@ public class CucumberBossController : MonoBehaviour
     private void LaunchSpike(float speed)
     {
         GameObject newSpike = Instantiate(cucumberStarter, transform.position + new Vector3(-3f, Random.Range(-1f, 1f), Random.Range(-.3f, .3f)), transform.localRotation, worldCucumber.transform);
-        //newSpike.transform.localScale = new Vector3(1f, 1f, 1f);
+        newSpike.transform.localScale = new Vector3(.01f, .01f, .01f);
         newSpike.AddComponent<Rigidbody>();
         newSpike.GetComponent<Rigidbody>().useGravity = false;
         newSpike.AddComponent<CucumberController>();
         newSpike.GetComponent<CucumberController>().alert = alert;
-        newSpike.GetComponent<Rigidbody>().AddForce(new Vector3(-1, 0, 0) * speed);
+        newSpike.GetComponent<Rigidbody>().AddForce(new Vector3(1, 0, 0) * speed);
     }
 
     void Attack()

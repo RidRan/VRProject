@@ -22,29 +22,35 @@ namespace Assets.Scripts
         /// <param name="objectToCut"></param>
         /// <returns></returns>
         public GameObject[] Slice(Plane plane, GameObject objectToCut)
-        {            
+        {
             //Get the current mesh and its verts and tris
             Mesh mesh = objectToCut.GetComponent<MeshFilter>().mesh;
-            var a = mesh.GetSubMesh(0);
+
             Sliceable sliceable = objectToCut.GetComponent<Sliceable>();
 
             //Create left and right slice of hollow object
-            SlicesMetadata slicesMeta = new SlicesMetadata(plane, mesh, sliceable.IsSolid, sliceable.ReverseWireTriangles, sliceable.ShareVertices, sliceable.SmoothVertices);            
+            //SlicesMetadata slicesMeta = new SlicesMetadata(plane, mesh, sliceable.IsSolid, sliceable.ReverseWireTriangles, sliceable.ShareVertices, sliceable.SmoothVertices);
 
-            GameObject positiveObject = CreateMeshGameObject(objectToCut, -1f);
+            //GameObject positiveObject = CreateMeshGameObject(objectToCut, -1f);
+            GameObject positiveObject = Instantiate(objectToCut, objectToCut.transform.position, objectToCut.transform.rotation);
             positiveObject.name = string.Format("{0}_positive", objectToCut.name);
 
-            GameObject negativeObject = CreateMeshGameObject(objectToCut, 1f);
+            //GameObject negativeObject = CreateMeshGameObject(objectToCut, 1f);
+            GameObject negativeObject = Instantiate(objectToCut, objectToCut.transform.position, objectToCut.transform.rotation);
+
             negativeObject.name = string.Format("{0}_negative", objectToCut.name);
 
-            var positiveSideMeshData = slicesMeta.PositiveSideMesh;
-            var negativeSideMeshData = slicesMeta.NegativeSideMesh;
+            positiveObject.transform.localScale = objectToCut.transform.localScale * .5f;
+            negativeObject.transform.localScale = objectToCut.transform.localScale * .5f;
 
-            positiveObject.GetComponent<MeshFilter>().mesh = positiveSideMeshData;
-            negativeObject.GetComponent<MeshFilter>().mesh = negativeSideMeshData;
+            //var positiveSideMeshData = slicesMeta.PositiveSideMesh;
+            //var negativeSideMeshData = slicesMeta.NegativeSideMesh;
 
-            SetupColliders(positiveObject, positiveSideMeshData);
-            SetupColliders(negativeObject, negativeSideMeshData);
+            //positiveObject.GetComponent<MeshFilter>().mesh = positiveSideMeshData;
+            //negativeObject.GetComponent<MeshFilter>().mesh = negativeSideMeshData;
+
+            //SetupColliders(positiveObject, positiveSideMeshData);
+            //SetupColliders(negativeObject, negativeSideMeshData);
 
             return new GameObject[] { positiveObject, negativeObject};
 
@@ -63,7 +69,7 @@ namespace Assets.Scripts
 
             meshGameObject.GetComponent<MeshRenderer>().materials = originalMaterial;
 
-            meshGameObject.transform.localScale = originalObject.transform.localScale;
+            meshGameObject.transform.localScale = originalObject.transform.localScale * .05f;
             meshGameObject.transform.rotation = originalObject.transform.rotation;
             meshGameObject.transform.position = new Vector3(originalObject.transform.position.x + (.1f* direction), originalObject.transform.position.y, originalObject.transform.position.z);
 
