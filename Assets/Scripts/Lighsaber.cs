@@ -79,6 +79,7 @@ public class Lighsaber : MonoBehaviour
         }
 
         //Draw first triangle vertices for back and front
+        Debug.Log("_base.transform.position " + _base.transform.position);
         _vertices[_frameCount] = _base.transform.position;
         _vertices[_frameCount + 1] = _tip.transform.position;
         _vertices[_frameCount + 2] = _previousTipPosition;
@@ -159,6 +160,7 @@ public class Lighsaber : MonoBehaviour
 
         if(sliceable != null)
         {
+            Debug.Log("fuck");
             GameObject[] slices = Slicer.instance.Slice(plane, other.gameObject);
             Destroy(other.gameObject);
 
