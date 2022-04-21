@@ -7510,7 +7510,7 @@ GameObject:
   - component: {fileID: 1220318167}
   - component: {fileID: 1220318166}
   m_Layer: 0
-  m_Name: Spot Light (4)
+  m_Name: EmergencySpotlight2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7528,7 +7528,7 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 0, b: 0, a: 1}
-  m_Intensity: 1
+  m_Intensity: 2.52
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -11289,7 +11289,7 @@ GameObject:
   - component: {fileID: 1868894223}
   - component: {fileID: 1868894222}
   m_Layer: 0
-  m_Name: Spot Light (3)
+  m_Name: EmergencySpotlight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11307,7 +11307,7 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 0, b: 0, a: 1}
-  m_Intensity: 1
+  m_Intensity: 2.5
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
