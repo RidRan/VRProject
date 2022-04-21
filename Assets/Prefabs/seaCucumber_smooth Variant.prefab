@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8393130781634195950}
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.101, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children: []
   m_Father: {fileID: 6715479037797021873}
@@ -167,5 +167,4 @@ MonoBehaviour:
   healthPoints: 0
   cucumberStarter: {fileID: 6862977595827749850, guid: 9f6c9884e22b77742a2b8548f7e3a52d, type: 3}
   worldCucumber: {fileID: 8393130781634195950}
-  numSpikes: 1
   alert: {fileID: 0}
