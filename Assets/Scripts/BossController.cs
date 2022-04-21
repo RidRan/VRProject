@@ -42,8 +42,6 @@ public class BossController : MonoBehaviour
 
     private int hit = -1;
 
-    private int attackMode = -1;
-
     private Vector3 startScale;
 
     public Animator animator;
@@ -70,7 +68,7 @@ public class BossController : MonoBehaviour
         }
 
         currentHealth = maxHealth;
-        moveTarget = transform.position.y + 10f;
+        moveTarget = transform.position.y;
         startScale = transform.localScale;
     }
 
@@ -99,14 +97,7 @@ public class BossController : MonoBehaviour
         TargetPlayer();
 
         counter++;
-
-        if (counter % 300 == 0)
-        {
-            moveTarget += attackMode * 10f;
-            attackMode *= -1;
-            transform.localScale = startScale * 1.5f;
-            Attack();
-        }
+        Attack(counter);
     }
 
     private float Sin(float angle)
@@ -137,14 +128,14 @@ public class BossController : MonoBehaviour
         newSpike.transform.Rotate(angleZ - 90, 0, angleX - 90);
     }
 
-    private void LaunchSpike()
+    private void LaunchSpike(Vector3 offset)
     {
         GetComponent<AudioSource>().PlayOneShot(shootSpike);
 
         float forwardOffset = -transform.localScale.x * .75f;
         Debug.Log(forwardOffset);
 
-        GameObject newSpike = Instantiate(spikeStarter, SpikeSpawnPoint.transform.position, transform.localRotation, worldSpikes.transform);
+        GameObject newSpike = Instantiate(spikeStarter, SpikeSpawnPoint.transform.position + offset, transform.localRotation, worldSpikes.transform);
         float spikeScale = 50f;
         newSpike.transform.localScale = new Vector3(spikeScale, spikeScale, spikeScale);
         newSpike.AddComponent<SpikeController>();
@@ -215,9 +206,90 @@ public class BossController : MonoBehaviour
         transform.localEulerAngles = rotation + (bodyTarget - rotation) * turnSpeed;
     }
 
-    void Attack()
+    int attackMode = 0;
+    bool attacking = false;
+    bool attackReady = false;
+
+    int attackDelay = 500;
+    int spikeCounter = 0;
+
+    void Attack(int counter)
     {
-        LaunchSpike();
+
+        //no attack
+        if (attackMode == 0)
+        {
+            if (counter % attackDelay == 0)
+            {
+                spikeCounter = 0;
+                attackMode = 2;
+            }
+        }
+        //sky attack
+        else if (attackMode == 1)
+        {
+            int spikeDelay = 30;
+            int spikeCount = 5;
+            float attackSpeed = 2f;
+            float attackHeight = 20f;
+
+            if (counter % spikeDelay == 0)
+            {
+                //attack start
+                if (spikeCounter == 0)
+                {
+                    Fly(attackHeight);
+                    moveSpeed *= attackSpeed;
+                }
+                
+                //attack
+                LaunchSpike(Vector3.zero);
+                spikeCounter++;
+            }
+
+            //attack end
+            if (spikeCounter == spikeCount)
+            {
+                attackMode = 0;
+                Fly(-attackHeight);
+                moveSpeed /= attackSpeed;
+            }
+        } 
+        //triple attack
+        else if (attackMode == 2)
+        {
+            int spikeDelay = 30;
+            int spikeCount = 1;
+            float attackSpeed = 1f;
+            float attackHeight = 0f;
+
+            if (counter % spikeDelay == 0)
+            {
+                //attack start
+                if (spikeCounter == 0)
+                {
+                    Fly(attackHeight);
+                    moveSpeed *= attackSpeed;
+                }
+
+                //attack
+
+                float spread = 5f;
+                LaunchSpike(new Vector3(0, 0, spread));
+                LaunchSpike(new Vector3(0, 0, 0));
+                LaunchSpike(new Vector3(0, 0, -spread));
+                spikeCounter++;
+            }
+
+            //attack end
+            if (spikeCounter == spikeCount)
+            {
+                attackMode = 0;
+                Fly(-attackHeight);
+                moveSpeed /= attackSpeed;
+            }
+        }
+        
     }
 
     float DamageValue() {
@@ -245,6 +317,11 @@ public class BossController : MonoBehaviour
             inflateSpeed *= 10f;
         }
         
+    }
+
+    private void Fly(float distance)
+    {
+        moveTarget += distance;
     }
 
     private void Puff(float scale)
