@@ -2223,6 +2223,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3637805570234282640, guid: a7fae0878b2f2cf48901ac9fc0f9e185, type: 3}
   m_PrefabInstance: {fileID: 248078860}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &278870528 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 125964, guid: dc06161b6d97feb419f45f03b62e14b9, type: 3}
+  m_PrefabInstance: {fileID: 1881535827}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &296323591
 GameObject:
   m_ObjectHideFlags: 0
@@ -5970,11 +5975,6 @@ Transform:
   m_Father: {fileID: 217122523}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &919695908 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 110716, guid: dc06161b6d97feb419f45f03b62e14b9, type: 3}
-  m_PrefabInstance: {fileID: 1881535827}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &940202047
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8662,7 +8662,7 @@ Transform:
   m_GameObject: {fileID: 1447880509}
   m_LocalRotation: {x: -0.000000029802326, y: -0.7071068, z: -0.000000044703487, w: 0.7071068}
   m_LocalPosition: {x: 39.1, y: 12.7, z: -0}
-  m_LocalScale: {x: 20, y: 20, z: 20}
+  m_LocalScale: {x: 4, y: 4, z: 4}
   m_Children:
   - {fileID: 573864239}
   - {fileID: 1889822043}
@@ -8682,7 +8682,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed4cc65550a3c804aabe7f4dd4e3958c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inflateSpeed: 0.01
+  inflateSpeed: 0.001
   moveSpeed: 0.05
   turnSpeed: 1
   maxHealth: 100
@@ -8699,10 +8699,12 @@ MonoBehaviour:
   eyeSpeed: 0.05
   leftEye: {fileID: 351360458}
   rightEye: {fileID: 661486982}
-  target: {fileID: 919695908}
+  target: {fileID: 278870528}
   spikeSpeed: 50
   animator: {fileID: 413483043}
   SpikeSpawnPoint: {fileID: 1551133811}
+  breatheSpeed: 50
+  breatheValue: 2.5
 --- !u!82 &1447880512
 AudioSource:
   m_ObjectHideFlags: 0

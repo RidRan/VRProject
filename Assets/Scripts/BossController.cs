@@ -7,7 +7,7 @@ public class BossController : MonoBehaviour
 {
     private float currentInflate = 1f;
     public float inflateSpeed = .01f;
-    private float inflateTarget = 1f;
+    private float inflateTarget = 1.1f;
 
     public float moveSpeed;
     public float turnSpeed;
@@ -48,6 +48,11 @@ public class BossController : MonoBehaviour
 
     public GameObject SpikeSpawnPoint;
 
+    public int breatheSpeed;
+    public float breatheValue;
+
+    private bool intro = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -70,6 +75,8 @@ public class BossController : MonoBehaviour
         currentHealth = maxHealth;
         moveTarget = transform.position.y;
         startScale = transform.localScale;
+        inflateTarget = startScale.x * 5f;
+        inflateSpeed *= 5f;
     }
 
     // Update is called once per frame
@@ -89,15 +96,42 @@ public class BossController : MonoBehaviour
             transform.position = transform.position - new Vector3(0, moveSpeed, 0);
         }
 
-        if (transform.localScale.x > startScale.x)
+        if (transform.localScale.x > inflateTarget)
         {
             transform.localScale = transform.localScale * (1f - inflateSpeed);
         }
-        
+        else if (transform.localScale.x < inflateTarget)
+        {
+            transform.localScale = transform.localScale * (1f + inflateSpeed);
+        }
+
         TargetPlayer();
 
         counter++;
+
+        if (intro)
+        {
+            if (counter > 250)
+            {
+                inflateSpeed /= 5f;
+                intro = false;
+            } 
+            else
+            {
+                return;
+            }
+        }
+
         Attack(counter);
+
+        if (counter % breatheSpeed == 0)
+        {
+
+            breatheValue *= -1f;
+            inflateTarget += breatheValue;
+        }
+
+
     }
 
     private float Sin(float angle)
@@ -118,7 +152,7 @@ public class BossController : MonoBehaviour
     private void GenerateSpike(float angleX, float angleZ)
     {
         float spikeScale = 2f;
-        float height = 10f;
+        float height = 2f;
 
         angleX += 90;
         angleZ += 90;
@@ -132,9 +166,6 @@ public class BossController : MonoBehaviour
     {
         GetComponent<AudioSource>().PlayOneShot(shootSpike);
 
-        float forwardOffset = -transform.localScale.x * .75f;
-        Debug.Log(forwardOffset);
-
         GameObject newSpike = Instantiate(spikeStarter, SpikeSpawnPoint.transform.position + offset, transform.localRotation, worldSpikes.transform);
         float spikeScale = 50f;
         newSpike.transform.localScale = new Vector3(spikeScale, spikeScale, spikeScale);
@@ -145,11 +176,8 @@ public class BossController : MonoBehaviour
         Vector3 targetPosition = target.transform.position;
         Vector3 spikePosition = newSpike.transform.position;
 
-        newSpike.transform.localEulerAngles = new Vector3(
-            0,
-            0,
-            -Atan((targetPosition.x - spikePosition.x) / (targetPosition.y - spikePosition.y)) + 180
-            );
+        newSpike.transform.LookAt(target.transform);
+        newSpike.transform.Rotate(new Vector3(90, 0, 0));
 
         newSpike.AddComponent<Rigidbody>();
         newSpike.GetComponent<Rigidbody>().useGravity = false;
@@ -210,7 +238,7 @@ public class BossController : MonoBehaviour
     bool attacking = false;
     bool attackReady = false;
 
-    int attackDelay = 500;
+    int attackDelay = 300;
     int spikeCounter = 0;
 
     void Attack(int counter)
@@ -222,7 +250,7 @@ public class BossController : MonoBehaviour
             if (counter % attackDelay == 0)
             {
                 spikeCounter = 0;
-                attackMode = 2;
+                attackMode = Mathf.CeilToInt(Random.value*3f);
             }
         }
         //sky attack
@@ -230,8 +258,9 @@ public class BossController : MonoBehaviour
         {
             int spikeDelay = 30;
             int spikeCount = 5;
-            float attackSpeed = 2f;
+            float attackSpeed = 3f;
             float attackHeight = 20f;
+            float inflateValue = 1.5f;
 
             if (counter % spikeDelay == 0)
             {
@@ -240,6 +269,8 @@ public class BossController : MonoBehaviour
                 {
                     Fly(attackHeight);
                     moveSpeed *= attackSpeed;
+                    inflateTarget *= inflateValue;
+                    inflateSpeed *= attackSpeed;
                 }
                 
                 //attack
@@ -253,6 +284,8 @@ public class BossController : MonoBehaviour
                 attackMode = 0;
                 Fly(-attackHeight);
                 moveSpeed /= attackSpeed;
+                inflateTarget /= inflateValue;
+                inflateSpeed /= attackSpeed;
             }
         } 
         //triple attack
@@ -260,8 +293,9 @@ public class BossController : MonoBehaviour
         {
             int spikeDelay = 30;
             int spikeCount = 1;
-            float attackSpeed = 1f;
-            float attackHeight = 0f;
+            float attackSpeed = 100f;
+            float attackHeight = .1f;
+            float inflateValue = 1.5f;
 
             if (counter % spikeDelay == 0)
             {
@@ -270,14 +304,15 @@ public class BossController : MonoBehaviour
                 {
                     Fly(attackHeight);
                     moveSpeed *= attackSpeed;
+                    inflateTarget *= inflateValue;
                 }
 
                 //attack
 
                 float spread = 5f;
-                LaunchSpike(new Vector3(0, 0, spread));
+                LaunchSpike(new Vector3(0, spread, spread));
                 LaunchSpike(new Vector3(0, 0, 0));
-                LaunchSpike(new Vector3(0, 0, -spread));
+                LaunchSpike(new Vector3(0, spread, -spread));
                 spikeCounter++;
             }
 
@@ -287,9 +322,46 @@ public class BossController : MonoBehaviour
                 attackMode = 0;
                 Fly(-attackHeight);
                 moveSpeed /= attackSpeed;
+                inflateTarget /= inflateValue;
             }
         }
-        
+        //dual attack
+        else if (attackMode == 3)
+        {
+            int spikeDelay = 30;
+            int spikeCount = 3;
+            float attackSpeed = 1f;
+            float attackHeight = 0f;
+            float inflateValue = 1.5f;
+
+            if (counter % spikeDelay == 0)
+            {
+                //attack start
+                if (spikeCounter == 0)
+                {
+                    Fly(attackHeight);
+                    moveSpeed *= attackSpeed;
+                    inflateTarget *= inflateValue;
+                }
+
+                //attack
+
+                float spread = 5f;
+                LaunchSpike(new Vector3(0, spread, spread));
+                LaunchSpike(new Vector3(0, spread, -spread));
+                spikeCounter++;
+            }
+
+            //attack end
+            if (spikeCounter == spikeCount)
+            {
+                attackMode = 0;
+                Fly(-attackHeight);
+                moveSpeed /= attackSpeed;
+                inflateTarget /= inflateValue;
+            }
+        }
+
     }
 
     float DamageValue() {
@@ -301,20 +373,19 @@ public class BossController : MonoBehaviour
         GetComponent<AudioSource>().PlayOneShot(hurt);
 
         currentHealth -= spikeDamage;
+        Debug.Log(currentHealth);
         Color eyeColor = new Color(1, 1 - DamageValue(), 1 - DamageValue());
-        Debug.Log(eyeColor);
         leftEye.GetComponent<MeshRenderer>().materials[0].color = eyeColor;
         rightEye.GetComponent<MeshRenderer>().materials[0].color = eyeColor;
 
-        startScale *= 1.025f;
-
         eyeSpeed *= .8f;
+        inflateTarget += breatheValue;
+        moveTarget += breatheValue;
 
-        if (DamageValue() == 0)
+        if (currentHealth <= 0)
         {
             Debug.Log("Fish dead");
-            startScale *= .01f;
-            inflateSpeed *= 10f;
+            
         }
         
     }
