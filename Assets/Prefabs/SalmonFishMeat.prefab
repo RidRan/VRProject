@@ -18,8 +18,8 @@ GameObject:
   - component: {fileID: 3817613334928540505}
   - component: {fileID: 3817613334928540516}
   m_Layer: 0
-  m_Name: PufferFishMeat
-  m_TagString: Puffer
+  m_Name: SalmonFishMeat
+  m_TagString: Salmon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -65,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 570c9581fc816d34f8ee90faa28162a6, type: 2}
+  - {fileID: 2100000, guid: 0febabd7194594b2bba338bf342fce3e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

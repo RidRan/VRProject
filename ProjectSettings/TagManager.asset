@@ -16,6 +16,10 @@ TagManager:
   - Undefined
   - Plate
   - Ticket
+  - Red
+  - Blue
+  - Puffer
+  - Salmon
   layers:
   - Default
   - TransparentFX
