@@ -29,7 +29,7 @@ public class CucumberSlice : MonoBehaviour
             Vector3 normal = contact.point;
 
             //Transform the normal so that it is aligned with the object we are slicing's transform.
-            Vector3 transformedNormal = ((Vector3)(other.gameObject.transform.localToWorldMatrix.transpose * normal)).normalized;
+            Vector3 transformedNormal = ((Vector3)(gameObject.transform.localToWorldMatrix.transpose * normal)).normalized;
 
             Plane plane = new Plane();
 
@@ -42,17 +42,18 @@ public class CucumberSlice : MonoBehaviour
                 plane = plane.flipped;
             }
 
-            Sliceable sliceable = other.gameObject.GetComponent<Sliceable>();
+            //Sliceable sliceable = other.gameObject.GetComponent<Sliceable>();
 
-            if (sliceable != null)
-            {
-                GameObject[] slices = Slicer.instance.Slice(plane, other.gameObject);
-                Destroy(other.gameObject);
+            GameObject[] slices = Slicer.instance.Slice(plane, gameObject);
+            Destroy(gameObject);
 
-                Rigidbody rigidbody = slices[1].GetComponent<Rigidbody>();
-                Vector3 newNormal = transformedNormal + Vector3.up * 1;
-                rigidbody.AddForce(newNormal, ForceMode.Impulse);
-            }
+            Rigidbody rigidbody = slices[1].GetComponent<Rigidbody>();
+            Vector3 newNormal = transformedNormal + Vector3.up * 1;
+            rigidbody.AddForce(newNormal, ForceMode.Impulse);
+
+
+
+
         }
     }
 }

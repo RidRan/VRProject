@@ -20,6 +20,9 @@ TagManager:
   - Blue
   - Puffer
   - Salmon
+  - Pink
+  - Green
+  - Yellow
   layers:
   - Default
   - TransparentFX
