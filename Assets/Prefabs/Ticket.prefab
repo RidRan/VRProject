@@ -467,6 +467,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Image1
       objectReference: {fileID: 0}
+    - target: {fileID: 6956880189879576186, guid: 0f30686106bf9a94eb8f4677f7ccf19a, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f30686106bf9a94eb8f4677f7ccf19a, type: 3}
 --- !u!1 &4386871048054339835 stripped
@@ -519,14 +523,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   orders:
-  - image: {fileID: 21300000, guid: f6bcb025b0469ce45aaeb399fd90ac06, type: 3}
+  - image: {fileID: 21300000, guid: cf20f8805bbeb1146a2c9a6a4ee74288, type: 3}
     amount: 1
-  - image: {fileID: 21300000, guid: f6bcb025b0469ce45aaeb399fd90ac06, type: 3}
+  - image: {fileID: 21300000, guid: cf20f8805bbeb1146a2c9a6a4ee74288, type: 3}
     amount: 2
-  - image: {fileID: 21300000, guid: 87b4967926cd6404bac782f242de2f5d, type: 3}
+  - image: {fileID: 21300000, guid: dd9511848b0416e468aa9219063659a7, type: 3}
+    amount: 1
+  - image: {fileID: 21300000, guid: dd9511848b0416e468aa9219063659a7, type: 3}
     amount: 2
-  - image: {fileID: 21300000, guid: 87b4967926cd6404bac782f242de2f5d, type: 3}
-    amount: 2
+  - image: {fileID: 21300000, guid: a7216b3700e417d4c830c70a9c532a18, type: 3}
+    amount: 1
   sceneImage1: {fileID: 1174080222393022014}
   sceneQnt1: {fileID: 3122903336042510489}
   sceneImage2: {fileID: 1470045418851436119}

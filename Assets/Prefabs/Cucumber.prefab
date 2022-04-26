@@ -12,11 +12,11 @@ GameObject:
   - component: {fileID: 6862977595827749846}
   - component: {fileID: 6862977595827749845}
   - component: {fileID: 6862977595827749840}
-  - component: {fileID: 6862977595827749851}
   - component: {fileID: 5362792906346506567}
   - component: {fileID: 6501588224605657634}
   - component: {fileID: 6183175518172962863}
   - component: {fileID: 340630450198323953}
+  - component: {fileID: 3281205463571461253}
   m_Layer: 0
   m_Name: Cucumber
   m_TagString: Topping
@@ -103,23 +103,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &6862977595827749851
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6862977595827749850}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c74b9b79e7d79c048a3f5f2f0e37119d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _isSolid: 1
-  _reverseWindTriangles: 1
-  _useGravity: 1
-  _shareVertices: 1
-  _smoothVertices: 1
 --- !u!114 &5362792906346506567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -253,3 +236,15 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3281205463571461253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6862977595827749850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4360f3d13c55e7f43a0b7108e30c7ec6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

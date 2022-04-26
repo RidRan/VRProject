@@ -17,8 +17,9 @@ public class BinManager : MonoBehaviour
     public float backScale;
 
     public bool spawnAtStartup = true;
-    private bool spawning = false;
-    public bool sendSpawnMessageToParent = false;
+    private bool spawningFront = false;
+	private bool spawningBack = false;
+	public bool sendSpawnMessageToParent = false;
 
 
     // Start is called before the first frame update
@@ -31,8 +32,8 @@ public class BinManager : MonoBehaviour
 
 		if (spawnAtStartup)
 		{
-			SpawnAnObject(frontPrefab, frontSpawnPoint, frontScale);
-            SpawnAnObject(backPrefab, backSpawnPoint, backScale);
+			SpawnAnObject(frontPrefab, frontSpawnPoint, frontScale, true);
+            SpawnAnObject(backPrefab, backSpawnPoint, backScale, false);
 		}
     }
 
@@ -42,7 +43,7 @@ public class BinManager : MonoBehaviour
         
     }
 
-    public GameObject SpawnAnObject(GameObject prefab, Transform spawnPoint, float scale)
+    public GameObject SpawnAnObject(GameObject prefab, Transform spawnPoint, float scale, bool front=true)
 	{
 		if (prefab == null)
 		{
@@ -61,28 +62,36 @@ public class BinManager : MonoBehaviour
 			}
 		}
 
-		spawning = false;
+		if (front)
+        {
+			spawningFront = false;
+        }
+		else
+        {
+			spawningBack = false;
+        }
+
 		return spawnedObject;
 	}
 
 	public void OnTriggerExit(Collider other)
     {
-        if (!spawning && other.gameObject.CompareTag(frontTag))
+        if (!spawningFront && other.gameObject.CompareTag(frontTag))
         {
-			StartCoroutine(WaitSpawnAnObject(frontPrefab, frontSpawnPoint, frontScale));
-			spawning = true;
-		} else if (!spawning && other.gameObject.CompareTag(backTag))
+			StartCoroutine(WaitSpawnAnObject(frontPrefab, frontSpawnPoint, frontScale, true));
+			spawningFront = true;
+		} else if (!spawningBack && other.gameObject.CompareTag(backTag))
         {
-			StartCoroutine(WaitSpawnAnObject(backPrefab, backSpawnPoint, backScale));
-			spawning = true;
+			StartCoroutine(WaitSpawnAnObject(backPrefab, backSpawnPoint, backScale, false));
+			spawningBack = true;
         }
 		
 	}
 
-	private IEnumerator WaitSpawnAnObject(GameObject prefab, Transform spawnPoint, float scale)
+	private IEnumerator WaitSpawnAnObject(GameObject prefab, Transform spawnPoint, float scale, bool front = true)
     {
 		yield return new WaitForSeconds(1.25f);
-		SpawnAnObject(prefab, spawnPoint, scale);
+		SpawnAnObject(prefab, spawnPoint, scale, front);
     }
 
 

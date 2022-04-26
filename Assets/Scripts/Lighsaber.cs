@@ -159,7 +159,6 @@ public class Lighsaber : MonoBehaviour
 
         if(sliceable != null)
         {
-            Debug.Log("fuck");
             GameObject[] slices = Slicer.instance.Slice(plane, other.gameObject);
             Destroy(other.gameObject);
 
