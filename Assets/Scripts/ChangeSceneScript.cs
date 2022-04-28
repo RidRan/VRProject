@@ -14,7 +14,6 @@ namespace Valve.VR.InteractionSystem.Sample
 
         void FixedUpdate()
         {
-
             counter++;
             if (cutscene && counter > cutsceneLength)
             {
