@@ -12,10 +12,12 @@ public class SpikeController : MonoBehaviour
     public GameObject player;
     public float speed;
 
+    private ParticleSystem sparks;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        sparks = transform.GetChild(1).GetComponent<ParticleSystem>();
     }
     private void Awake()
     {
