@@ -3,7 +3,17 @@ guid: 3d30d901b5bb74c23aa4c3b7a565fa9b
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: cucumber
+    second: {fileID: 2100000, guid: efdec807184b6489f9cdd5d7d532d294, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lips
+    second: {fileID: 2100000, guid: a6f20e93e97084cff9ab2f1d25df34d8, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
