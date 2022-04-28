@@ -39,6 +39,7 @@ public class BossController : MonoBehaviour
     public GameObject leftFin;
     public GameObject rightFin;
     public GameObject backFin;
+    public GameObject fillet;
 
     public GameObject target;
 
@@ -438,13 +439,23 @@ public class BossController : MonoBehaviour
     {
         dead = true;
         inflateTarget += 10f;
-        float force = 50f;
+        float force = 100f;
 
         body.SetActive(false);
 
         foreach (GameObject spike in spikes)
         {
             Explode(spike, force);
+        }
+
+        int numFillets = 20;
+        float sizeFillet = 3f;
+        float spaceFillet = 5f;
+        for (int i = 0; i < numFillets; i++)
+        {
+            GameObject newFillet = Instantiate(fillet, transform.position + new Vector3(Random.value, Random.value, Random.value) * spaceFillet, transform.localRotation);
+            newFillet.transform.localScale = newFillet.transform.localScale * sizeFillet;
+            Explode(newFillet, force);
         }
 
         animator.enabled = false;

@@ -36,6 +36,7 @@ public class PlayerMovementController : MonoBehaviour
 
     public void OnHit()
     {
-
+        sparks.Play();
+        currentHealth -= 1;
     }
 }
