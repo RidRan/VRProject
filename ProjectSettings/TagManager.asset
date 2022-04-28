@@ -23,6 +23,9 @@ TagManager:
   - Pink
   - Green
   - Yellow
+  - Wasabi
+  - SeaWeed
+  - Greenonion
   layers:
   - Default
   - TransparentFX
