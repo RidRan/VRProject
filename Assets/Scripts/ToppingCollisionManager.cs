@@ -9,6 +9,8 @@ public class ToppingCollisionManager : MonoBehaviour
 
     public Hand hand;
 
+    public List<string> toppingslist;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,7 +20,12 @@ public class ToppingCollisionManager : MonoBehaviour
     
     public void OnCollisionEnter(Collision other)
     {
-        if((other.gameObject.CompareTag("Topping")) && (SushiManager.instance.holding == null))
+        bool isTopping = false;
+        if(toppingslist.Contains(other.gameObject.tag)){
+            isTopping = true;
+        }
+
+        if(isTopping && (SushiManager.instance.holding == null))
         {
             Destroy(other.gameObject.GetComponent<Throwable>());
             Destroy(other.gameObject.GetComponent<Rigidbody>());
