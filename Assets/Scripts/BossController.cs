@@ -35,6 +35,10 @@ public class BossController : MonoBehaviour
     public float eyeSpeed;
     public GameObject leftEye;
     public GameObject rightEye;
+    public GameObject body;
+    public GameObject leftFin;
+    public GameObject rightFin;
+    public GameObject backFin;
 
     public GameObject target;
 
@@ -48,14 +52,22 @@ public class BossController : MonoBehaviour
 
     public GameObject SpikeSpawnPoint;
 
+    public GameObject player;
+
     public int breatheSpeed;
     public float breatheValue;
 
     private bool intro = true;
 
+    private bool dead = false;
+
+    private List<GameObject> spikes;
+
     // Start is called before the first frame update
     void Start()
     {
+        spikes = new List<GameObject>();
+
         for (int i = 0; i < 360; i += 30)
         {
             for (int j = 0; j < 180; j += 30)
@@ -73,7 +85,7 @@ public class BossController : MonoBehaviour
         }
 
         currentHealth = maxHealth;
-        moveTarget = transform.position.y;
+        moveTarget = transform.position.y + 15f;
         startScale = transform.localScale;
         inflateTarget = startScale.x * 5f;
         inflateSpeed *= 5f;
@@ -160,6 +172,8 @@ public class BossController : MonoBehaviour
         GameObject newSpike = Instantiate(spikeStarter, transform.position + height * new Vector3(Sin(angleX) * Cos(angleZ), Sin(angleX) * Sin(angleZ), Cos(angleX)), transform.localRotation, bodySpikes.transform);
         newSpike.transform.localScale = new Vector3(spikeScale, spikeScale, spikeScale);
         newSpike.transform.Rotate(angleZ - 90, 0, angleX - 90);
+
+        spikes.Add(newSpike);
     }
 
     private void LaunchSpike(Vector3 offset)
@@ -172,6 +186,7 @@ public class BossController : MonoBehaviour
         newSpike.AddComponent<SpikeController>();
         newSpike.GetComponent<SpikeController>().target = target;
         newSpike.GetComponent<SpikeController>().boss = gameObject;
+        newSpike.GetComponent<SpikeController>().player = player;
 
         Vector3 targetPosition = target.transform.position;
         Vector3 spikePosition = newSpike.transform.position;
@@ -244,6 +259,11 @@ public class BossController : MonoBehaviour
     void Attack(int counter)
     {
 
+        if (dead)
+        {
+            return;
+        }
+
         //no attack
         if (attackMode == 0)
         {
@@ -293,7 +313,7 @@ public class BossController : MonoBehaviour
         {
             int spikeDelay = 150;
             int spikeCount = 2;
-            float attackSpeed = 10f;
+            float attackSpeed = 1f;
             float attackHeight = .1f;
             float inflateValue = 1.5f;
 
@@ -370,6 +390,11 @@ public class BossController : MonoBehaviour
 
     public void OnHit()
     {
+        if (dead)
+        {
+            return;
+        }
+
         GetComponent<AudioSource>().PlayOneShot(hurt);
 
         currentHealth -= spikeDamage;
@@ -378,14 +403,14 @@ public class BossController : MonoBehaviour
         leftEye.GetComponent<MeshRenderer>().materials[0].color = eyeColor;
         rightEye.GetComponent<MeshRenderer>().materials[0].color = eyeColor;
 
-        eyeSpeed *= .8f;
-        inflateTarget += breatheValue;
-        moveTarget += breatheValue;
+        eyeSpeed = .05f * (1f - DamageValue());
+        inflateTarget += Mathf.Abs(breatheValue) * .1f;
+        moveTarget += Mathf.Abs(breatheValue) * .05f;
 
         if (currentHealth <= 0)
         {
             Debug.Log("Fish dead");
-            
+            OnDeath();
         }
         
     }
@@ -399,5 +424,35 @@ public class BossController : MonoBehaviour
     {
 
         transform.localScale = transform.localScale * (scale);
+    }
+
+    private void Explode(GameObject go, float force)
+    {
+        go.AddComponent<Rigidbody>();
+        go.GetComponent<Rigidbody>().useGravity = true;
+        go.GetComponent<Rigidbody>().isKinematic = false;
+        go.GetComponent<Rigidbody>().AddForce((go.transform.position - transform.position) * force);
+    }
+
+    private void OnDeath()
+    {
+        dead = true;
+        inflateTarget += 10f;
+        float force = 50f;
+
+        body.SetActive(false);
+
+        foreach (GameObject spike in spikes)
+        {
+            Explode(spike, force);
+        }
+
+        animator.enabled = false;
+
+        Explode(leftEye, force);
+        Explode(rightEye, force);
+        Explode(leftFin, force);
+        Explode(rightFin, force);
+        Explode(backFin, force);
     }
 }

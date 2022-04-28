@@ -9,6 +9,7 @@ public class SpikeController : MonoBehaviour
 
     public GameObject target;
     public GameObject boss;
+    public GameObject player;
     public float speed;
 
     // Start is called before the first frame update
@@ -61,6 +62,7 @@ public class SpikeController : MonoBehaviour
         } 
         else if (collision.gameObject.CompareTag("Player"))
         {
+            player.GetComponent<PlayerMovementController>().OnHit();
             Destroy(gameObject);
         }
         else if (collision.gameObject.CompareTag("Boss"))

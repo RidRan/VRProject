@@ -11,10 +11,14 @@ public class PlayerMovementController : MonoBehaviour
 
     int counter = 0;
 
+    public int maxHealth;
+    int currentHealth;
+    public ParticleSystem sparks;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        int currentHealth = maxHealth;
     }
 
     // Update is called once per frame
@@ -28,5 +32,10 @@ public class PlayerMovementController : MonoBehaviour
         transform.position = new Vector3(transform.position.x + walkScale * Mathf.Sin(counter * walkSpeed) * Mathf.Sin(counter * walkSpeed), transform.position.y + boundScale * Mathf.Sin(counter * boundSpeed), transform.position.z);
 
         counter++;
+    }
+
+    public void OnHit()
+    {
+
     }
 }
