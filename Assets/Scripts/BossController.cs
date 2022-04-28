@@ -167,7 +167,7 @@ public class BossController : MonoBehaviour
         GetComponent<AudioSource>().PlayOneShot(shootSpike);
 
         GameObject newSpike = Instantiate(spikeStarter, SpikeSpawnPoint.transform.position + offset, transform.localRotation, worldSpikes.transform);
-        float spikeScale = 50f;
+        float spikeScale = 2f * transform.localScale.x;
         newSpike.transform.localScale = new Vector3(spikeScale, spikeScale, spikeScale);
         newSpike.AddComponent<SpikeController>();
         newSpike.GetComponent<SpikeController>().target = target;
@@ -256,9 +256,9 @@ public class BossController : MonoBehaviour
         //sky attack
         else if (attackMode == 1)
         {
-            int spikeDelay = 30;
+            int spikeDelay = 50;
             int spikeCount = 5;
-            float attackSpeed = 3f;
+            float attackSpeed = 2f;
             float attackHeight = 20f;
             float inflateValue = 1.5f;
 
@@ -291,9 +291,9 @@ public class BossController : MonoBehaviour
         //triple attack
         else if (attackMode == 2)
         {
-            int spikeDelay = 30;
-            int spikeCount = 1;
-            float attackSpeed = 100f;
+            int spikeDelay = 150;
+            int spikeCount = 2;
+            float attackSpeed = 10f;
             float attackHeight = .1f;
             float inflateValue = 1.5f;
 
@@ -328,7 +328,7 @@ public class BossController : MonoBehaviour
         //dual attack
         else if (attackMode == 3)
         {
-            int spikeDelay = 30;
+            int spikeDelay = 100;
             int spikeCount = 3;
             float attackSpeed = 1f;
             float attackHeight = 0f;
