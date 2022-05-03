@@ -13,7 +13,6 @@ public class PlayerMovementController : MonoBehaviour
 
     public int maxHealth;
     int currentHealth;
-    public ParticleSystem sparks;
 
     // Start is called before the first frame update
     void Start()
@@ -36,7 +35,6 @@ public class PlayerMovementController : MonoBehaviour
 
     public void OnHit()
     {
-        sparks.Play();
         currentHealth -= 1;
     }
 }
