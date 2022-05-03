@@ -612,8 +612,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toppings:
-  - image: {fileID: 21300000, guid: cf20f8805bbeb1146a2c9a6a4ee74288, type: 3}
-    Tag: Puffer
+  - image: {fileID: 21300000, guid: 2c1f5ba8b55a92d49b4faea89c57b154, type: 3}
+    Tag: Cod
   - image: {fileID: 21300000, guid: b955331392241204d9b8b578b1bcc282, type: 3}
     Tag: Wasabi
   - image: {fileID: 21300000, guid: dd9511848b0416e468aa9219063659a7, type: 3}
@@ -632,3 +632,9 @@ MonoBehaviour:
   sceneImage1: {fileID: 1174080222393022014}
   sceneImage2: {fileID: 1470045418851436119}
   sceneImage3: {fileID: 6698200333461463385}
+  cucumberImage: {fileID: 21300000, guid: a9b2eab8aa351d14ca960779b065d2d3, type: 3}
+  cucumberTag: Cucumber
+  pufferImage: {fileID: 21300000, guid: cf20f8805bbeb1146a2c9a6a4ee74288, type: 3}
+  pufferTag: Puffer
+  spawnFront: 1
+  spawnBack: 1
