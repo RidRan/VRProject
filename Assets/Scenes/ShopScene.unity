@@ -159,6 +159,7 @@ MonoBehaviour:
   spawnAtStartup: 1
   sendSpawnMessageToParent: 0
   scale: 0.33
+  totalTickets: 0
 --- !u!23 &3255957
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -292,6 +293,33 @@ Transform:
   m_Father: {fileID: 1069025169}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &37933044 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1657387555093883706, guid: 8870e18179904dd4e917cd020378a369, type: 3}
+  m_PrefabInstance: {fileID: 854378030}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &37933045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 37933044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 221bd6c9775f98d48b43ecfeddc2c7cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frontPrefab: {fileID: 7673816194883625984, guid: 3c9417d17b50c94479530dbd2cc23091, type: 3}
+  backPrefab: {fileID: 404871890435271030, guid: ce43c8e75da7e8047b412a23bf5fdef0, type: 3}
+  frontTag: Rice
+  backTag: Salmon
+  frontSpawnPoint: {fileID: 273846147}
+  backSpawnPoint: {fileID: 273526186}
+  frontScale: 0.05
+  backScale: 5
+  spawnAtStartup: 1
+  sendSpawnMessageToParent: 0
 --- !u!1 &39503167
 GameObject:
   m_ObjectHideFlags: 0
@@ -1882,6 +1910,16 @@ Transform:
   m_Father: {fileID: 97501590}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &273526186 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1657387555988732777, guid: 8870e18179904dd4e917cd020378a369, type: 3}
+  m_PrefabInstance: {fileID: 854378030}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &273846147 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1657387555916159218, guid: 8870e18179904dd4e917cd020378a369, type: 3}
+  m_PrefabInstance: {fileID: 854378030}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &294406387
 GameObject:
   m_ObjectHideFlags: 0
@@ -5313,7 +5351,8 @@ PrefabInstance:
       propertyPath: frontPrefab
       value: 
       objectReference: {fileID: 7673816194883625984, guid: 3c9417d17b50c94479530dbd2cc23091, type: 3}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6266914333732050813, guid: 8870e18179904dd4e917cd020378a369, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 8870e18179904dd4e917cd020378a369, type: 3}
 --- !u!1 &860422614
 GameObject:

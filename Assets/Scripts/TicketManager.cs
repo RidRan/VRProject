@@ -19,11 +19,13 @@ public class TicketManager : MonoBehaviour
 
 	public float scale;
 	private bool spawning = false;
+	public int totalTickets;
 
 
     private void Start()
     {
-        if (ticketPrefab == null)
+		totalTickets = 0;
+		if (ticketPrefab == null)
 		{
 			return;
 		}
@@ -37,7 +39,8 @@ public class TicketManager : MonoBehaviour
 
     public GameObject SpawnATicket()
 	{
-        //Debug.Log("StartSpawnATicket");
+		//Debug.Log("StartSpawnATicket");
+		totalTickets++;
 		if (ticketPrefab == null)
 		{
 			return null;
@@ -58,5 +61,16 @@ public class TicketManager : MonoBehaviour
         //Debug.Log("EndSpawnATicket");
 
 		return ticket;
+	}
+
+	public void WaitSpawnTicket(float seconds = 2)
+    {
+		StartCoroutine(SpawmTicketAnimation(seconds));
+    }
+
+	private IEnumerator SpawmTicketAnimation(float seconds)
+    {
+		yield return new WaitForSeconds(seconds);
+		SpawnATicket();
 	}
 }

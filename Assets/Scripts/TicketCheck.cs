@@ -70,16 +70,7 @@ public class TicketCheck : MonoBehaviour
             Debug.Log(value);
             Destroy(other.gameObject);
             Destroy(gameObject);
-            ticketManager.SpawnATicket();
-            //StartCoroutine(spawnNewTicket());
+            ticketManager.WaitSpawnTicket();
         }
     }
-
-    private IEnumerator spawnNewTicket()
-    {
-		yield return new WaitForSeconds(2);
-		ticketManager.SpawnATicket();
-    }
-
-
 }
