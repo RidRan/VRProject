@@ -27,8 +27,14 @@ public class ToppingCollisionManager : MonoBehaviour
 
         if(isTopping && (SushiManager.instance.holding == null))
         {
-            Destroy(other.gameObject.GetComponent<Throwable>());
-            Destroy(other.gameObject.GetComponent<Rigidbody>());
+             // creates joint
+            FixedJoint joint = gameObject.AddComponent<FixedJoint>(); 
+            // sets joint position to point of contact
+            joint.anchor = other.contacts[0].point; 
+            // conects the joint to the other object
+            joint.connectedBody = other.contacts[0].otherCollider.transform.GetComponentInParent<Rigidbody>(); 
+            // Stops objects from continuing to collide and creating more joints
+            joint.enableCollision = false; 
             other.transform.parent = transform;
         }
     }

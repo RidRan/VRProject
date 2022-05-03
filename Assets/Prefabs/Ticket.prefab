@@ -34,8 +34,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 17.5, y: -41.4}
-  m_SizeDelta: {x: 20, y: 20}
+  m_AnchoredPosition: {x: 50, y: -41.4}
+  m_SizeDelta: {x: 50, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1470045418851436116
 CanvasRenderer:
@@ -88,6 +88,7 @@ GameObject:
   - component: {fileID: 1470045419012548134}
   - component: {fileID: 1470045419012548135}
   - component: {fileID: 1470045419012548132}
+  - component: {fileID: 4698300338460366606}
   m_Layer: 0
   m_Name: Ticket
   m_TagString: Ticket
@@ -245,6 +246,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.10188675, z: 1}
   m_Center: {x: 0, y: 0.034644127, z: 0}
+--- !u!114 &4698300338460366606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1470045419012548133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c33d2f3dae1b8e45824ddb0e20f9355, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1470045419017753882
 GameObject:
   m_ObjectHideFlags: 0
@@ -350,7 +363,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8721486592624281809}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 88354603539008786}
@@ -358,8 +371,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 17.5, y: -67.8}
-  m_SizeDelta: {x: 20, y: 20}
+  m_AnchoredPosition: {x: 50, y: -66}
+  m_SizeDelta: {x: 50, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2011219252110487468
 CanvasRenderer:
@@ -425,6 +438,18 @@ PrefabInstance:
     - target: {fileID: 1460605066285503497, guid: 0f30686106bf9a94eb8f4677f7ccf19a, type: 3}
       propertyPath: m_Sprite
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3360767676978361147, guid: 0f30686106bf9a94eb8f4677f7ccf19a, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 3360767676978361147, guid: 0f30686106bf9a94eb8f4677f7ccf19a, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 3360767676978361147, guid: 0f30686106bf9a94eb8f4677f7ccf19a, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -17
       objectReference: {fileID: 0}
     - target: {fileID: 3411757254665001646, guid: 0f30686106bf9a94eb8f4677f7ccf19a, type: 3}
       propertyPath: m_Text
@@ -574,7 +599,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &292231689363087920
+--- !u!114 &937170690115371109
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -587,23 +612,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toppings:
-  - image: {fileID: 21300000, guid: dd9511848b0416e468aa9219063659a7, type: 3}
-    amount: 1
   - image: {fileID: 21300000, guid: cf20f8805bbeb1146a2c9a6a4ee74288, type: 3}
-    amount: 1
-  - image: {fileID: 21300000, guid: d8b3ee18c8963b94585bf9a4389c7fea, type: 3}
-    amount: 1
-  - image: {fileID: 21300000, guid: aac6754a4df095c468ccf7714cc4c6b9, type: 3}
-    amount: 1
+    Tag: Puffer
   - image: {fileID: 21300000, guid: b955331392241204d9b8b578b1bcc282, type: 3}
-    amount: 1
-  - image: {fileID: 21300000, guid: 00f9e0587deccd24fa50b29df66c8623, type: 3}
-    amount: 1
+    Tag: Wasabi
+  - image: {fileID: 21300000, guid: dd9511848b0416e468aa9219063659a7, type: 3}
+    Tag: Salmon
+  - image: {fileID: 21300000, guid: aac6754a4df095c468ccf7714cc4c6b9, type: 3}
+    Tag: SeaWeed
+  - image: {fileID: 21300000, guid: d8b3ee18c8963b94585bf9a4389c7fea, type: 3}
+    Tag: Greenonion
   - image: {fileID: 21300000, guid: 8bcc9fb77f0754447a0bb18782e22fcb, type: 3}
-    amount: 1
+    Tag: Yellow
+  - image: {fileID: 21300000, guid: 00f9e0587deccd24fa50b29df66c8623, type: 3}
+    Tag: Red
   bases:
   - image: {fileID: 21300000, guid: a7216b3700e417d4c830c70a9c532a18, type: 3}
-    amount: 1
+    Tag: Rice
   sceneImage1: {fileID: 1174080222393022014}
   sceneImage2: {fileID: 1470045418851436119}
   sceneImage3: {fileID: 6698200333461463385}
