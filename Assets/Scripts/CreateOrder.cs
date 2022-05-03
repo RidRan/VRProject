@@ -8,12 +8,19 @@ using UnityEngine.UI;
 public class Order
 {
     public Sprite image;
-    public String Tag;
+    public string Tag;
+
+    public Order(Sprite i, string t)
+    {
+        image = i;
+        Tag = t;
+    }
 }
 
 
 public class CreateOrder : MonoBehaviour
 {
+    private TicketManager ticketManager;
     [SerializeField] private List<Order> toppings;
     [SerializeField] private List<Order> bases;
 
@@ -22,12 +29,46 @@ public class CreateOrder : MonoBehaviour
     public Image sceneImage3;
     private RollManager rollManager;
 
+    public Sprite cucumberImage;
+    public string cucumberTag;
+
+    public Sprite pufferImage;
+    public string pufferTag;
+
+    public bool spawnFront = true;
+    public bool spawnBack = true;
+
 
     private void Start()
     {
         rollManager = GameObject.FindGameObjectWithTag("RollManager").GetComponent<RollManager>();
+        spawnFront = true;
+        spawnBack = true;
+
+        ticketManager = GameObject.FindGameObjectWithTag("TicketManager").GetComponent<TicketManager>();
+
+        if (spawnFront)
+        {
+            if (ticketManager.data.totalTickets > 5)
+            {
+                AddCucumberTicket();
+                spawnFront = false;
+            }
+        }
+
+        if (spawnBack)
+        {
+            if (ticketManager.data.totalTickets > 10)
+            {
+                AddPufferTicket();
+                spawnBack = false;
+            }
+
+        }
         createAOrder();
     }
+
+
 
     public void createAOrder()
     {
@@ -57,5 +98,14 @@ public class CreateOrder : MonoBehaviour
     { 
         Order base1 = bases[0];
         return base1;
+    }
+
+    public void AddCucumberTicket()
+    {
+        toppings.Add(new Order(cucumberImage, cucumberTag));
+    }
+    public void AddPufferTicket()
+    {
+        toppings.Add(new Order(pufferImage, pufferTag));
     }
 }

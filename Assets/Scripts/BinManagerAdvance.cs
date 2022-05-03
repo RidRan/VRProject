@@ -23,13 +23,19 @@ public class BinManagerAdvance : MonoBehaviour
 	private bool spawningBack = false;
 	public bool sendSpawnMessageToParent = false;
 
-	public bool spawnGo = false;
+	public bool spawnFront = true;
+	public bool spawnBack = true;
+
+
 
 
 
 	// Start is called before the first frame update
 	void Start()
 	{
+		spawnFront = true;
+		spawnBack = true;
+
 		ticketManager = GameObject.FindGameObjectWithTag("TicketManager").GetComponent<TicketManager>();
 
 		if (frontPrefab == null || backPrefab == null)
@@ -37,31 +43,32 @@ public class BinManagerAdvance : MonoBehaviour
 			return;
 		}
 
+		if (spawnFront)
+		{
+			if (ticketManager.data.totalTickets > 5)
+			{
+				SpawnAnObject(frontPrefab, frontSpawnPoint, frontScale, true);
+				spawnFront = false;
+			}
+		}
+		
+		if (spawnBack)
+		{
+			if (ticketManager.data.totalTickets > 10)
+			{
+				SpawnAnObject(backPrefab, backSpawnPoint, backScale, false);
+				spawnBack = false;
+			}
+			
+		}
 	}
 
 	// Update is called once per frame
 	void Update()
 	{
-		/*if(spawnGo)
-        {
-
-        }
 		
-		if (ticketManager.totalTickets > 5)
-		{
-			if (spawnGo)
-			{
-				SpawnAnObject(frontPrefab, frontSpawnPoint, frontScale, true);
-				spawnGo = false;
-			}
 
-		}
-		if (ticketManager.totalTickets > 10)
-		{
-			SpawnAnObject(backPrefab, backSpawnPoint, backScale, false);
-		}
-		*/
-	
+
 	}
 
 	public GameObject SpawnAnObject(GameObject prefab, Transform spawnPoint, float scale, bool front = true)
