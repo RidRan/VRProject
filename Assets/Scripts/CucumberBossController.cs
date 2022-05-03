@@ -38,29 +38,28 @@ public class CucumberBossController : MonoBehaviour
         Vector3 currentScale = transform.localScale;
         transform.localScale = new Vector3(currentScale.x, currentScale.x , currentScale.z );
 
-
         counter++;
 
-        if (counter % 300 == 0)
+        if (counter % 100 == 0)
         {
             Attack();
         }
     }
 
 
-    private void LaunchSpike(float speed)
+    private void LaunchCucumber(float speed)
     {
-        GameObject newcucummber = Instantiate(cucumberStarter, transform.position + new Vector3(-3f, Random.Range(-1f, 1f), Random.Range(-.3f, .3f)), transform.localRotation, spawnPoint.transform);
-        newcucummber.AddComponent<Rigidbody>();
-        newcucummber.GetComponent<Rigidbody>().useGravity = false;
-        newcucummber.AddComponent<CucumberController>();
-        newcucummber.GetComponent<CucumberController>().alert = alert;
-        newcucummber.GetComponent<Rigidbody>().AddForce(new Vector3(1, 0, 0) * speed);
+        GameObject newcucumber = Instantiate(cucumberStarter, spawnPoint.transform.position, transform.localRotation, spawnPoint.transform);
+        newcucumber.AddComponent<Rigidbody>();
+        newcucumber.GetComponent<Rigidbody>().useGravity = false;
+        newcucumber.AddComponent<CucumberController>();
+        newcucumber.GetComponent<CucumberController>().alert = alert;
+        newcucumber.GetComponent<Rigidbody>().AddForce(new Vector3(1, 0, 0) * speed);
     }
 
     void Attack()
     {
-        LaunchSpike(1000f);
+        LaunchCucumber(100f);
     }
 
     private void OnCollisionEnter(Collision collision)
