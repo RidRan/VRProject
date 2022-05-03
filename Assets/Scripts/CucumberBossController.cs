@@ -14,15 +14,17 @@ public class CucumberBossController : MonoBehaviour
 
 
     public GameObject cucumberStarter;
-    public GameObject worldCucumber;
+    public GameObject spawnPoint;
 
 
     public GameObject alert;
+    public int bossHealth;
+
 
     // Start is called before the first frame update
     void Start()
     {
-
+        healthPoints = 100;
     }
 
     // Update is called once per frame
@@ -36,49 +38,44 @@ public class CucumberBossController : MonoBehaviour
         Vector3 currentScale = transform.localScale;
         transform.localScale = new Vector3(currentScale.x, currentScale.x , currentScale.z );
 
-        //float floatValue = floatScale * Mathf.Sin(counter * floatSpeed);
-        //transform.position = new Vector3(transform.position.x, transform.position.y + floatValue, transform.position.z);
-
         counter++;
 
-        if (counter % 300 == 0)
+        if (counter % 100 == 0)
         {
             Attack();
         }
     }
 
-    private float Sin(float angle)
-    {
-        return Mathf.Sin(angle / 180 * Mathf.PI);
-    }
 
-    private float Cos(float angle)
+    private void LaunchCucumber(float speed)
     {
-        return Mathf.Cos(angle / 180 * Mathf.PI);
-    }
-
-
-    private void LaunchSpike(float speed)
-    {
-        GameObject newSpike = Instantiate(cucumberStarter, transform.position + new Vector3(-3f, Random.Range(-1f, 1f), Random.Range(-.3f, .3f)), transform.localRotation, worldCucumber.transform);
-        newSpike.transform.localScale = new Vector3(.01f, .01f, .01f);
-        newSpike.AddComponent<Rigidbody>();
-        newSpike.GetComponent<Rigidbody>().useGravity = false;
-        newSpike.AddComponent<CucumberController>();
-        newSpike.GetComponent<CucumberController>().alert = alert;
-        newSpike.GetComponent<Rigidbody>().AddForce(new Vector3(1, 0, 0) * speed);
+        GameObject newcucumber = Instantiate(cucumberStarter, spawnPoint.transform.position, transform.localRotation, spawnPoint.transform);
+        newcucumber.AddComponent<Rigidbody>();
+        newcucumber.GetComponent<Rigidbody>().useGravity = false;
+        newcucumber.AddComponent<CucumberController>();
+        newcucumber.GetComponent<CucumberController>().alert = alert;
+        newcucumber.GetComponent<Rigidbody>().AddForce(new Vector3(1, 0, 0) * speed);
     }
 
     void Attack()
     {
-        LaunchSpike(1000f);
+        LaunchCucumber(100f);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Spike"))
+        if (collision.gameObject.CompareTag("Topping"))
         {
             Debug.Log("spike hit fish");
+        }
+    }
+
+    void setBossHealth()
+    {
+        bossHealth = bossHealth - 5;
+        if (bossHealth <= 0)
+        {
+            //TODO: pop the boss 
         }
     }
 }

@@ -63,6 +63,10 @@ public class BossController : MonoBehaviour
     private bool dead = false;
 
     private List<GameObject> spikes;
+    private int timeOfDeath;
+    private int deathDelay = 300;
+
+    public string loadLevelName;
 
     // Start is called before the first frame update
     void Start()
@@ -144,7 +148,13 @@ public class BossController : MonoBehaviour
             inflateTarget += breatheValue;
         }
 
-
+        if (dead)
+        {
+            if (counter > timeOfDeath + deathDelay)
+            {
+                UnityEngine.SceneManagement.SceneManager.LoadScene(loadLevelName);
+            }
+        }
     }
 
     private float Sin(float angle)

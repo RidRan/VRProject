@@ -16,6 +16,20 @@ TagManager:
   - Undefined
   - Plate
   - Ticket
+  - Red
+  - Blue
+  - Puffer
+  - Salmon
+  - Pink
+  - Green
+  - Yellow
+  - Wasabi
+  - SeaWeed
+  - Greenonion
+  - Cod
+  - Cucumber
+  - TicketManager
+  - RollManager
   layers:
   - Default
   - TransparentFX
