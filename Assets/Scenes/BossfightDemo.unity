@@ -5799,6 +5799,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6494702746707530150, guid: 6cb830339ff38ec429f1e181aeec3523, type: 3}
   m_PrefabInstance: {fileID: 870827920}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &874850941 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6631732758489630548, guid: 873377f8e0126af47974eee3f8fd0348, type: 3}
+  m_PrefabInstance: {fileID: 2083314429}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &876662320
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6728,9 +6733,11 @@ MonoBehaviour:
   walkScale: 0
   boundSpeed: 0
   boundScale: 0
-  maxHealth: 5
+  maxHealth: 20
   damageFilter: {fileID: 2018539372}
   siren: {fileID: 0}
+  leftSword: {fileID: 874850941}
+  rightSword: {fileID: 1215002940}
 --- !u!1 &1115466931 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6512529875788350717, guid: 49585cf728c064b109d472d7a6a52a76, type: 3}
@@ -7126,6 +7133,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 833527661565768146, guid: d4f0955d86e102d4388604ec1233aafc, type: 3}
   m_PrefabInstance: {fileID: 1199067276}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1215002940 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6631732758489630548, guid: 873377f8e0126af47974eee3f8fd0348, type: 3}
+  m_PrefabInstance: {fileID: 1896359254}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1220501155
 GameObject:
@@ -11026,7 +11038,6 @@ GameObject:
   - component: {fileID: 2018539373}
   - component: {fileID: 2018539376}
   - component: {fileID: 2018539375}
-  - component: {fileID: 2018539374}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -11048,19 +11059,6 @@ Transform:
   m_Father: {fileID: 525562491}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &2018539374
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2018539372}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &2018539375
 MeshRenderer:
   m_ObjectHideFlags: 0
