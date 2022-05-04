@@ -10,9 +10,6 @@ public class CucumberBossController : MonoBehaviour
 
     int counter = 0;
 
-    public int healthPoints;
-
-
     public GameObject cucumberStarter;
     public GameObject spawnPoint;
 
@@ -20,11 +17,59 @@ public class CucumberBossController : MonoBehaviour
     public GameObject alert;
     public int bossHealth;
 
+    public float moveSpeed;
+    public float turnSpeed;
+    private float moveTarget;
+
+
+    public float maxHealth;
+    private float currentHealth;
+    public float cucumberDamage;
+
+
+    public AudioClip hurt;
+    public AudioClip roar;
+    public AudioClip shootCucumber;
+    
+    public float eyeSpeed;
+    public GameObject leftEye;
+    public GameObject rightEye;
+    public GameObject body;
+    public GameObject cucumberfillet;
+
+    public GameObject target;
+
+    public float cucumberSpeed;
+
+    private int hit = -1;
+
+    private Vector3 startScale;
+
+    public Animator animator;
+
+
+    public GameObject player;
+
+    public int breatheSpeed;
+    public float breatheValue;
+
+    private bool intro = true;
+
+    private bool dead = false;
+
+    private int timeOfDeath;
+    private int deathDelay = 300;
+
+    public string loadLevelName;
+
+
 
     // Start is called before the first frame update
     void Start()
     {
-        healthPoints = 100;
+        currentHealth = maxHealth;
+        moveTarget = transform.position.y + 15f;
+        startScale = transform.localScale;
     }
 
     // Update is called once per frame
@@ -59,23 +104,52 @@ public class CucumberBossController : MonoBehaviour
 
     void Attack()
     {
+        if (dead)
+        {
+            return;
+        }
+
         LaunchCucumber(100f);
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Topping"))
-        {
-            Debug.Log("spike hit fish");
-        }
-    }
 
-    void setBossHealth()
+    public void setBossHealth()
     {
         bossHealth = bossHealth - 5;
         if (bossHealth <= 0)
         {
-            //TODO: pop the boss 
+            OnDeath(); 
         }
     }
+
+    private void Explode(GameObject go, float force)
+    {
+        go.AddComponent<Rigidbody>();
+        go.GetComponent<Rigidbody>().useGravity = true;
+        go.GetComponent<Rigidbody>().isKinematic = false;
+        go.GetComponent<Rigidbody>().AddForce((go.transform.position - transform.position) * force);
+    }
+
+    private void OnDeath()
+    {
+        dead = true;
+        float force = 100f;
+
+        body.SetActive(false);
+
+
+        int numFillets = 20;
+        float sizeFillet = 3f;
+        float spaceFillet = 5f;
+
+        for (int i = 0; i < numFillets; i++)
+        {
+            GameObject newFillet = Instantiate(cucumberfillet, transform.position + new Vector3(Random.value, Random.value, Random.value) * spaceFillet, transform.localRotation);
+            newFillet.transform.localScale = newFillet.transform.localScale * sizeFillet;
+            Explode(newFillet, force);
+        }
+        animator.enabled = false;
+    }
+
+
 }

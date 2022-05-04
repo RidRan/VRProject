@@ -2481,6 +2481,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: cucumberMonster
       objectReference: {fileID: 0}
+    - target: {fileID: 2018491712300127457, guid: f4d91f2e5a00b064c8991e7260dfc9a9, type: 3}
+      propertyPath: m_TagString
+      value: CucumberBossController
+      objectReference: {fileID: 0}
     - target: {fileID: 5416030648914724041, guid: f4d91f2e5a00b064c8991e7260dfc9a9, type: 3}
       propertyPath: m_LocalPosition.y
       value: 100
@@ -2489,6 +2493,10 @@ PrefabInstance:
       propertyPath: alert
       value: 
       objectReference: {fileID: 788402039}
+    - target: {fileID: 7647338971505254281, guid: f4d91f2e5a00b064c8991e7260dfc9a9, type: 3}
+      propertyPath: maxHealth
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 7647338971505254281, guid: f4d91f2e5a00b064c8991e7260dfc9a9, type: 3}
       propertyPath: spawnPoint
       value: 

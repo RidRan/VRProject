@@ -5,10 +5,12 @@ using Assets.Scripts;
 
 public class CucumberSlice : MonoBehaviour
 {
+    private CucumberBossController CucumberBoss;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        CucumberBoss = GameObject.FindGameObjectWithTag("CucumberBossController").GetComponent<CucumberBossController>();
     }
 
     // Update is called once per frame
@@ -23,9 +25,7 @@ public class CucumberSlice : MonoBehaviour
         {
             if(gameObject.transform.localScale.sqrMagnitude > .1)
             {
-                Debug.Log("Cut");
-                //Get the point perpendicular to the triangle above which is the normal
-                //https://docs.unity3d.com/Manual/ComputingNormalPerpendicularVector.html
+
                 ContactPoint contact = other.contacts[0];
                 Vector3 normal = contact.point;
 
@@ -33,7 +33,6 @@ public class CucumberSlice : MonoBehaviour
                 Vector3 transformedNormal = ((Vector3)(gameObject.transform.localToWorldMatrix.transpose * normal)).normalized;
 
                 Plane plane = new Plane();
-
 
                 var direction = Vector3.Dot(Vector3.up, transformedNormal);
 
@@ -51,6 +50,8 @@ public class CucumberSlice : MonoBehaviour
                 Rigidbody rigidbody = slices[1].GetComponent<Rigidbody>();
                 Vector3 newNormal = transformedNormal + Vector3.up * 1;
                 rigidbody.AddForce(newNormal, ForceMode.Impulse);
+                
+                CucumberBoss.setBossHealth();
             }
         }
     }

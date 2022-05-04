@@ -26,10 +26,6 @@ public class BinManagerAdvance : MonoBehaviour
 	public bool spawnFront = true;
 	public bool spawnBack = true;
 
-
-
-
-
 	// Start is called before the first frame update
 	void Start()
 	{
