@@ -16,17 +16,14 @@ public class PlayerMovementController : MonoBehaviour
 
     bool damaged;
 
-    public Light leftLight;
-    public Light rightLight;
-
+    public GameObject damageFilter;
     public AudioSource siren;
 
     // Start is called before the first frame update
     void Start()
     {
         int currentHealth = maxHealth;
-        leftLight.intensity = 0f;
-        rightLight.intensity = 0f;
+        damageFilter.GetComponent<MeshRenderer>().material.color = new Color(1f, 0f, 0f, 0f);
     }
 
     // Update is called once per frame
@@ -44,24 +41,27 @@ public class PlayerMovementController : MonoBehaviour
         if (damaged)
         {
             int maxIntensity = 100;
-            int delay = 100;
+            int delay = 2;
             int sirenDelay = 100;
-            leftLight.intensity = (counter / delay) % maxIntensity;
-            rightLight.intensity = (counter / delay) % maxIntensity;
+            damageFilter.GetComponent<MeshRenderer>().material.color = new Color(1f, 0f, 0f, (counter / delay % maxIntensity) / 255f);
 
             if (counter % sirenDelay == 0)
             {
-                siren.PlayOneShot(siren.clip);
+                //siren.PlayOneShot(siren.clip);
             }
         }
     }
 
     public void OnHit()
     {
-        currentHealth -= 1;
+        if (currentHealth > 0) currentHealth -= 1;
+
+        Debug.Log(currentHealth + "/" + maxHealth);
+
         if (currentHealth / maxHealth <= .25f)
         {
             damaged = true;
+            Debug.Log("damaged");
         }
     }
 }

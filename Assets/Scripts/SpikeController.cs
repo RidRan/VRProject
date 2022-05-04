@@ -65,6 +65,7 @@ public class SpikeController : MonoBehaviour
         } 
         else if (collision.gameObject.CompareTag("Player"))
         {
+            Debug.Log("Hit player");
             player.GetComponent<PlayerMovementController>().OnHit();
             sparks.Play();
             transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y / 3f, transform.localScale.z);
