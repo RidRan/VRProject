@@ -3005,7 +3005,7 @@ GameObject:
   - component: {fileID: 558794594}
   m_Layer: 0
   m_Name: Audio Source
-  m_TagString: Untagged
+  m_TagString: SoundManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3027,7 +3027,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: fd178afd0f43d034a81c442e4062b459, type: 3}
   - {fileID: 8300000, guid: d796b8cba49b6e643b80ceadda664fa3, type: 3}
   currentClip: {fileID: 0}
-  source: {fileID: 0}
+  source: {fileID: 558794595}
   minWaitBetweenPlays: 1
   maxWaitBetweenPlays: 8
   waitTimeCountdown: -1
@@ -6845,11 +6845,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1095628108}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee18c7234167aa744b20a13be4abd182, type: 3}
+  m_Script: {fileID: 11500000, guid: fe4be7433710fd7428bda62a752ff94d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loadLevelName: BossfightDemo
-  cutscene: 0
+  loadLevelName: GoingCutScene
 --- !u!114 &1095628110
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6870,7 +6869,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1095628109}
-        m_TargetAssemblyTypeName: Valve.VR.InteractionSystem.Sample.ChangeSceneScript,
+        m_TargetAssemblyTypeName: Valve.VR.InteractionSystem.Sample.ChangeSceneShop,
           Assembly-CSharp
         m_MethodName: OnButtonDown
         m_Mode: 0
@@ -6886,7 +6885,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1095628109}
-        m_TargetAssemblyTypeName: Valve.VR.InteractionSystem.Sample.ChangeSceneScript,
+        m_TargetAssemblyTypeName: Valve.VR.InteractionSystem.Sample.ChangeSceneShop,
           Assembly-CSharp
         m_MethodName: OnButtonUp
         m_Mode: 0
@@ -7377,6 +7376,147 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &1150067860
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1150067863}
+  - component: {fileID: 1150067862}
+  - component: {fileID: 1150067861}
+  m_Layer: 0
+  m_Name: Alarm Source
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!82 &1150067861
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1150067860}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 47831a4e06a459148855ac6a655fbd66, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 0.328
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &1150067862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1150067860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5570b5465045b243ab77700769e81ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  source: {fileID: 1150067861}
+--- !u!4 &1150067863
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1150067860}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.5987835, y: -2.6829839, z: 2.9532259}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 40
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1183258555
 GameObject:
   m_ObjectHideFlags: 0
@@ -7549,6 +7689,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1220318167}
   - component: {fileID: 1220318166}
+  - component: {fileID: 1220318168}
   m_Layer: 0
   m_Name: EmergencySpotlight2
   m_TagString: Untagged
@@ -7632,6 +7773,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 37
   m_LocalEulerAnglesHint: {x: 57.069, y: -90, z: -90}
+--- !u!114 &1220318168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1220318165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3a52d17ec2b00e4bb5d1cc3ccc1dd01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lt: {fileID: 1220318166}
+  rotateDirection: 1
 --- !u!1 &1222098000
 GameObject:
   m_ObjectHideFlags: 0
@@ -11232,6 +11387,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1868894223}
   - component: {fileID: 1868894222}
+  - component: {fileID: 1868894224}
   m_Layer: 0
   m_Name: EmergencySpotlight
   m_TagString: Untagged
@@ -11315,6 +11471,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 36
   m_LocalEulerAnglesHint: {x: 51.758, y: -94.959, z: -90}
+--- !u!114 &1868894224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1868894221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3a52d17ec2b00e4bb5d1cc3ccc1dd01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lt: {fileID: 1868894222}
+  rotateDirection: -1
 --- !u!1 &1885938853
 GameObject:
   m_ObjectHideFlags: 0

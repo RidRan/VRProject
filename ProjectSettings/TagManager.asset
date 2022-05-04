@@ -31,6 +31,8 @@ TagManager:
   - TicketManager
   - RollManager
   - SaveData
+  - CucumberBossController
+  - SoundManager
   layers:
   - Default
   - TransparentFX
