@@ -17,7 +17,7 @@ public class SpikeController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        sparks = transform.GetChild(1).GetComponent<ParticleSystem>();
+        sparks = transform.GetChild(3).GetComponent<ParticleSystem>();
     }
     private void Awake()
     {
@@ -42,7 +42,6 @@ public class SpikeController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Collided with " + collision.gameObject.tag);
 
         if (collision.gameObject.CompareTag("Sword"))
         {
@@ -60,12 +59,17 @@ public class SpikeController : MonoBehaviour
             GetComponent<Rigidbody>().velocity = GetComponent<Rigidbody>().velocity * -2f;
             GetComponent<Rigidbody>().useGravity = true;
 
+            sparks.Play();
+
             collision.gameObject.GetComponent<SwordController>().PlayClang();
         } 
         else if (collision.gameObject.CompareTag("Player"))
         {
+            Debug.Log("Hit player");
             player.GetComponent<PlayerMovementController>().OnHit();
-            Destroy(gameObject);
+            sparks.Play();
+            transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y / 3f, transform.localScale.z);
+            Destroy(gameObject, .5f);
         }
         else if (collision.gameObject.CompareTag("Boss"))
         {
