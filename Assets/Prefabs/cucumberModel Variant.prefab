@@ -63,6 +63,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: cucumberModel Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 7781219851018494182, guid: cd5fdc81b3ac4f643b4e019c12a2640d, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -2218003722797358863, guid: cd5fdc81b3ac4f643b4e019c12a2640d, type: 3}
     - {fileID: -4022809700517796609, guid: cd5fdc81b3ac4f643b4e019c12a2640d, type: 3}
