@@ -67,6 +67,8 @@ public class CucumberBossController : MonoBehaviour
         Vector3 currentScale = transform.localScale;
         transform.localScale = new Vector3(currentScale.x, currentScale.x , currentScale.z );
 
+        TargetPlayer();
+
         counter++;
 
         if (counter % 100 == 0)
@@ -80,14 +82,67 @@ public class CucumberBossController : MonoBehaviour
         }
     }
 
+    private float Atan(float oa)
+    {
+        return Mathf.Atan(oa) * 180 / Mathf.PI;
+    }
+
+    void TargetPlayer()
+    {
+        Vector3 targetPosition = target.transform.position;
+
+        Vector3 leftEyePosition = leftEye.transform.position;
+        Vector3 leftEyeRotation = leftEye.transform.localEulerAngles;
+
+        float xa = -Atan((targetPosition.x - leftEyePosition.x) / (targetPosition.y - leftEyePosition.y));
+        float za = Atan((targetPosition.z - leftEyePosition.z) / (targetPosition.x - leftEyePosition.x));
+
+        Vector3 leftEyeTarget = new Vector3(
+            (xa < 0) ? xa + 180 : xa,
+            0,
+            za
+            );
+
+        leftEyeRotation = new Vector3(leftEyeRotation.x, 0, leftEyeRotation.y - 180);
+        leftEye.transform.localEulerAngles = leftEyeRotation + (leftEyeTarget - leftEyeRotation) * eyeSpeed;
+
+        Vector3 rightEyePosition = rightEye.transform.position;
+        Vector3 rightEyeRotation = rightEye.transform.localEulerAngles;
+
+        xa = -Atan((targetPosition.x - rightEyePosition.x) / (targetPosition.y - rightEyePosition.y));
+        za = Atan((targetPosition.z - rightEyePosition.z) / (targetPosition.x - rightEyePosition.x));
+
+        Vector3 rightEyeTarget = new Vector3(
+            (xa < 0) ? xa + 180 : xa,
+            0,
+            za
+            );
+
+        rightEyeRotation = new Vector3(rightEyeRotation.x, 0, rightEyeRotation.y - 180);
+        rightEye.transform.localEulerAngles = rightEyeRotation + (rightEyeTarget - rightEyeRotation) * eyeSpeed;
+
+        Vector3 position = transform.position;
+        Vector3 rotation = transform.localEulerAngles;
+
+        xa = Atan((targetPosition.y - position.y) / (targetPosition.x - position.x)) + 10;
+        float ya = -Atan((targetPosition.z - position.z) / (targetPosition.x - position.x)) - 90;
+
+        Vector3 bodyTarget = new Vector3(
+            xa,
+            ya,
+            0
+            );
+
+        rotation = new Vector3(rotation.x, rotation.y, 0);
+        transform.localEulerAngles = rotation + (bodyTarget - rotation) * turnSpeed;
+    }
+
 
     private void LaunchCucumber(Vector3 offset)
     {
         GameObject newcumber = Instantiate(cucumberStarter, spawnPoint.transform.position + offset, transform.localRotation);
-        float cucumberScale = 2f * transform.localScale.x;
+        float cucumberScale = 1.25f * transform.localScale.x;
         newcumber.transform.localScale = new Vector3(cucumberScale, cucumberScale, cucumberScale);
-
-        Debug.Log("Fuckumber");
 
         Vector3 targetPosition = target.transform.position;
         Vector3 cucumberPosition = newcumber.transform.position;
