@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovementController : MonoBehaviour
 {
@@ -13,12 +14,23 @@ public class PlayerMovementController : MonoBehaviour
 
     public int maxHealth;
     int currentHealth;
-    public ParticleSystem sparks;
+
+    bool damaged = false;
+
+    public GameObject damageFilter;
+    public AudioSource siren;
+
+    bool fade = false;
+    int fadeTime = 0;
+
+    public GameObject leftSword;
+    public GameObject rightSword;
 
     // Start is called before the first frame update
     void Start()
     {
-        int currentHealth = maxHealth;
+        currentHealth = maxHealth;
+        damageFilter.GetComponent<MeshRenderer>().material.color = new Color(1f, 0f, 0f, 0f);
     }
 
     // Update is called once per frame
@@ -32,11 +44,69 @@ public class PlayerMovementController : MonoBehaviour
         transform.position = new Vector3(transform.position.x + walkScale * Mathf.Sin(counter * walkSpeed) * Mathf.Sin(counter * walkSpeed), transform.position.y + boundScale * Mathf.Sin(counter * boundSpeed), transform.position.z);
 
         counter++;
+
+        if (fade)
+        {
+            Debug.Log("deadFade");
+
+            if (fadeTime == 0) fadeTime = counter;
+
+            int delay = 1;
+            damageFilter.GetComponent<MeshRenderer>().material.color = new Color(0f, 0f, 0f, (counter - fadeTime) / delay / 255f);
+
+            if (counter - fadeTime > 300)
+            {
+                fade = false;
+                currentHealth = maxHealth;
+                damageFilter.GetComponent<MeshRenderer>().material.color = new Color(0f, 0f, 0f, 0f);
+                SceneManager.LoadScene("BossfightDemo");
+                Destroy(gameObject);
+            }
+        }
+            
+        if (damaged)
+        {
+            Debug.Log("damageFade");
+
+            int maxIntensity = 100;
+            int delay = 5;
+            int sirenDelay = 100;
+            damageFilter.GetComponent<MeshRenderer>().material.color = new Color(1f, 0f, 0f, (counter / delay % maxIntensity) / 255f);
+
+            if (counter % sirenDelay == 0)
+            {
+                //siren.PlayOneShot(siren.clip);
+            }
+        }
     }
 
     public void OnHit()
     {
-        sparks.Play();
-        currentHealth -= 1;
+        if (currentHealth > 0)
+        {
+            currentHealth -= 1;
+        } 
+        else if (!fade)
+        {
+            Debug.Log("killed");
+
+            damaged = false;
+            fade = true;
+
+            leftSword.AddComponent<Rigidbody>();
+            leftSword.GetComponent<Rigidbody>().useGravity = true;
+            leftSword.GetComponent<Rigidbody>().isKinematic = false;
+
+            rightSword.AddComponent<Rigidbody>();
+            rightSword.GetComponent<Rigidbody>().useGravity = true;
+            rightSword.GetComponent<Rigidbody>().isKinematic = false;
+        }
+
+        Debug.Log(currentHealth + "/" + maxHealth);
+
+        if ((float) currentHealth / maxHealth <= .25f && currentHealth > 0)
+        {
+            damaged = true;
+        }
     }
 }
