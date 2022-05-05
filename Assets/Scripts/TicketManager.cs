@@ -19,12 +19,21 @@ public class TicketManager : MonoBehaviour
 
 	public float scale;
 	private bool spawning = false;
-	public int totalTickets;
 
+	public GameObject saveData;
+	public SaveData data;
 
     private void Start()
     {
-		totalTickets = 0;
+
+        GameObject saveDataInstance = GameObject.FindGameObjectWithTag("SaveData");
+		if(saveDataInstance == null)
+        {
+			saveDataInstance = Instantiate(saveData);
+        }
+
+		data = saveDataInstance.GetComponent<SaveData>();
+
 		if (ticketPrefab == null)
 		{
 			return;
@@ -39,8 +48,7 @@ public class TicketManager : MonoBehaviour
 
     public GameObject SpawnATicket()
 	{
-		//Debug.Log("StartSpawnATicket");
-		totalTickets++;
+		data.totalTickets++;
 		if (ticketPrefab == null)
 		{
 			return null;
@@ -58,7 +66,6 @@ public class TicketManager : MonoBehaviour
 		}
 
 		spawning = false;
-        //Debug.Log("EndSpawnATicket");
 
 		return ticket;
 	}

@@ -7,31 +7,44 @@ namespace Valve.VR.InteractionSystem.Sample
 {
     public class ChangeSceneScript : MonoBehaviour
     {
-        public string loadLevelName;
+        private TicketManager ticketManager;
+
         public bool cutscene = false;
-        private int cutsceneLength = 600;
+        private int cutsceneLength = 1200;
         private int counter = 0;
+
+        public string loadLevel1Name;
+
+        public string loadLevel2Name;
+
+        public GameObject saveData;
+        public SaveData data;
+
+        void Start()
+        {
+            GameObject saveDataInstance = GameObject.FindGameObjectWithTag("SaveData");
+            if (saveDataInstance == null)
+            {
+                saveDataInstance = Instantiate(saveData);
+            }
+
+            data = saveDataInstance.GetComponent<SaveData>();
+        }
 
         void FixedUpdate()
         {
             counter++;
             if (cutscene && counter > cutsceneLength)
             {
-                UnityEngine.SceneManagement.SceneManager.LoadScene(loadLevelName);
+                if (data.totalTickets <= 5)
+                {
+                    UnityEngine.SceneManagement.SceneManager.LoadScene(loadLevel1Name);
+                }
+                else if (data.totalTickets > 5)
+                {
+                    UnityEngine.SceneManagement.SceneManager.LoadScene(loadLevel2Name);
+                }
             }
         }
-
-
-        public void OnButtonDown(Hand fromHand)
-        {
-            UnityEngine.SceneManagement.SceneManager.LoadScene(loadLevelName);
-        }
-
-        public void OnButtonUp(Hand fromHand)
-        {
-            
-        }
-
-
     }
 }
