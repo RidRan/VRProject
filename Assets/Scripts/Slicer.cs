@@ -9,6 +9,9 @@ namespace Assets.Scripts
     class Slicer : MonoBehaviour
     {
         public static Slicer instance;
+        public GameObject cucumberSlicePrefab;
+        public GameObject greenOnionSlicePrefab;
+
 
         void Start()
         {
@@ -23,37 +26,82 @@ namespace Assets.Scripts
         /// <returns></returns>
         public GameObject[] Slice(Plane plane, GameObject objectToCut)
         {
-            //Get the current mesh and its verts and tris
-            Mesh mesh = objectToCut.GetComponent<MeshFilter>().mesh;
 
-            Sliceable sliceable = objectToCut.GetComponent<Sliceable>();
+            if(objectToCut.gameObject.CompareTag("Cucumber"))
+            {
+                //Get the current mesh and its verts and tris
+                Mesh mesh = objectToCut.GetComponent<MeshFilter>().mesh;
 
-            //Create left and right slice of hollow object
-            //SlicesMetadata slicesMeta = new SlicesMetadata(plane, mesh, sliceable.IsSolid, sliceable.ReverseWireTriangles, sliceable.ShareVertices, sliceable.SmoothVertices);
+                Sliceable sliceable = objectToCut.GetComponent<Sliceable>();
 
-            //GameObject positiveObject = CreateMeshGameObject(objectToCut, -1f);
-            GameObject positiveObject = Instantiate(objectToCut, objectToCut.transform.position, objectToCut.transform.rotation);
-            positiveObject.name = string.Format("{0}_positive", objectToCut.name);
 
-            //GameObject negativeObject = CreateMeshGameObject(objectToCut, 1f);
-            GameObject negativeObject = Instantiate(objectToCut, objectToCut.transform.position, objectToCut.transform.rotation);
+                GameObject positiveObject = Instantiate(cucumberSlicePrefab, objectToCut.transform.position, objectToCut.transform.rotation);
+                positiveObject.name = string.Format("{0}_positive", objectToCut.name);
 
-            negativeObject.name = string.Format("{0}_negative", objectToCut.name);
+                GameObject negativeObject = Instantiate(objectToCut, objectToCut.transform.position, objectToCut.transform.rotation);
 
-            positiveObject.transform.localScale = objectToCut.transform.localScale * .5f;
-            negativeObject.transform.localScale = objectToCut.transform.localScale * .5f;
+                negativeObject.name = string.Format("{0}_negative", objectToCut.name);
 
-            //var positiveSideMeshData = slicesMeta.PositiveSideMesh;
-            //var negativeSideMeshData = slicesMeta.NegativeSideMesh;
+                positiveObject.transform.localScale = objectToCut.transform.localScale * .5f;
+                negativeObject.transform.localScale = objectToCut.transform.localScale * .5f;
 
-            //positiveObject.GetComponent<MeshFilter>().mesh = positiveSideMeshData;
-            //negativeObject.GetComponent<MeshFilter>().mesh = negativeSideMeshData;
 
-            //SetupColliders(positiveObject, positiveSideMeshData);
-            //SetupColliders(negativeObject, negativeSideMeshData);
+                return new GameObject[] { positiveObject, negativeObject };
+            }
+            else if(objectToCut.gameObject.CompareTag("Greenonion"))
+            {
+                //Get the current mesh and its verts and tris
+                Mesh mesh = objectToCut.GetComponent<MeshFilter>().mesh;
 
-            return new GameObject[] { positiveObject, negativeObject};
+                Sliceable sliceable = objectToCut.GetComponent<Sliceable>();
 
+
+                GameObject positiveObject = Instantiate(greenOnionSlicePrefab, objectToCut.transform.position, objectToCut.transform.rotation);
+                positiveObject.name = string.Format("{0}_positive", objectToCut.name);
+
+                GameObject negativeObject = Instantiate(objectToCut, objectToCut.transform.position, objectToCut.transform.rotation);
+
+                negativeObject.name = string.Format("{0}_negative", objectToCut.name);
+
+                positiveObject.transform.localScale = objectToCut.transform.localScale * .5f;
+                negativeObject.transform.localScale = objectToCut.transform.localScale * .5f;
+
+
+                return new GameObject[] { positiveObject, negativeObject };
+            }
+            else
+            {
+                //Get the current mesh and its verts and tris
+                Mesh mesh = objectToCut.GetComponent<MeshFilter>().mesh;
+
+                Sliceable sliceable = objectToCut.GetComponent<Sliceable>();
+
+                //Create left and right slice of hollow object
+                //SlicesMetadata slicesMeta = new SlicesMetadata(plane, mesh, sliceable.IsSolid, sliceable.ReverseWireTriangles, sliceable.ShareVertices, sliceable.SmoothVertices);
+
+                //GameObject positiveObject = CreateMeshGameObject(objectToCut, -1f);
+                GameObject positiveObject = Instantiate(objectToCut, objectToCut.transform.position, objectToCut.transform.rotation);
+                positiveObject.name = string.Format("{0}_positive", objectToCut.name);
+
+                //GameObject negativeObject = CreateMeshGameObject(objectToCut, 1f);
+                GameObject negativeObject = Instantiate(objectToCut, objectToCut.transform.position, objectToCut.transform.rotation);
+
+                negativeObject.name = string.Format("{0}_negative", objectToCut.name);
+
+                positiveObject.transform.localScale = objectToCut.transform.localScale * .5f;
+                negativeObject.transform.localScale = objectToCut.transform.localScale * .5f;
+
+                //var positiveSideMeshData = slicesMeta.PositiveSideMesh;
+                //var negativeSideMeshData = slicesMeta.NegativeSideMesh;
+
+                //positiveObject.GetComponent<MeshFilter>().mesh = positiveSideMeshData;
+                //negativeObject.GetComponent<MeshFilter>().mesh = negativeSideMeshData;
+
+                //SetupColliders(positiveObject, positiveSideMeshData);
+                //SetupColliders(negativeObject, negativeSideMeshData);
+
+                return new GameObject[] { positiveObject, negativeObject };
+            }
         }        
 
         /// <summary>

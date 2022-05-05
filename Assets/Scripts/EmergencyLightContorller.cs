@@ -26,7 +26,7 @@ public class EmergencyLightContorller : MonoBehaviour
     // Darken the light completely over a period of 2 seconds.
     void Update()
     {
-        if (ticketManager.data.totalTickets == 2 || ticketManager.data.totalTickets == 10)
+        if (ticketManager.data.totalTickets == 5 || ticketManager.data.totalTickets == 10)
         {
             lt.intensity = 2.5f;
 
