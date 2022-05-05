@@ -47,6 +47,9 @@ public class Lighsaber : MonoBehaviour
     private Vector3 _triggerEnterBasePosition;
     private Vector3 _triggerExitTipPosition;
 
+    public GameObject cucumberSlicePrefab;
+    public GameObject greenOnionSlicePrefab;
+
     void Start()
     {
         //Init mesh and triangles
@@ -68,8 +71,13 @@ public class Lighsaber : MonoBehaviour
         //Set starting position for tip and base
         _previousTipPosition = _tip.transform.position;
         _previousBasePosition = _base.transform.position;
+
+        Slicer.instance.cucumberSlicePrefab = cucumberSlicePrefab;
+        Slicer.instance.greenOnionSlicePrefab = greenOnionSlicePrefab;
+
+
     }
-    
+
     void LateUpdate()
     {
         //Reset the frame count one we reach the frame length

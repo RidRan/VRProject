@@ -3,7 +3,9 @@ guid: 5ba78e27bb5e2534f9ac9e7bbfa168c6
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - cucumberSlicePrefab: {fileID: 6823771292260763790, guid: a4b59b4ad85093047968029b41927fab, type: 3}
+  - greenOnionSlicePrefab: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
