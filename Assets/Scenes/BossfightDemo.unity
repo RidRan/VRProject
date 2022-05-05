@@ -17923,7 +17923,7 @@ MonoBehaviour:
   player: {fileID: 1093481720}
   breatheSpeed: 50
   breatheValue: 2.5
-  loadLevelName: 
+  loadLevelName: LeavingCutScene
 --- !u!82 &1447880512
 AudioSource:
   m_ObjectHideFlags: 0
