@@ -23,8 +23,10 @@ public class CucumberSlice : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Sword"))
         {
-            if(gameObject.transform.localScale.sqrMagnitude > .1)
+            if(gameObject.transform.localScale.x > 55)
             {
+
+                Debug.Log(gameObject.transform.localScale);
 
                 ContactPoint contact = other.contacts[0];
                 Vector3 normal = contact.point;
@@ -45,6 +47,10 @@ public class CucumberSlice : MonoBehaviour
                 //Sliceable sliceable = other.gameObject.GetComponent<Sliceable>();
 
                 GameObject[] slices = Slicer.instance.Slice(plane, gameObject);
+                foreach (GameObject go in slices)
+                {
+                    go.GetComponent<Rigidbody>().useGravity = true;
+                }
                 Destroy(gameObject);
 
                 Rigidbody rigidbody = slices[1].GetComponent<Rigidbody>();

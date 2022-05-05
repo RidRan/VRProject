@@ -148,12 +148,9 @@ public class BossController : MonoBehaviour
             inflateTarget += breatheValue;
         }
 
-        if (dead)
+        if (dead && counter > timeOfDeath + deathDelay)
         {
-            if (counter > timeOfDeath + deathDelay)
-            {
-                UnityEngine.SceneManagement.SceneManager.LoadScene(loadLevelName);
-            }
+            UnityEngine.SceneManagement.SceneManager.LoadScene(loadLevelName);
         }
     }
 
@@ -475,5 +472,7 @@ public class BossController : MonoBehaviour
         Explode(leftFin, force);
         Explode(rightFin, force);
         Explode(backFin, force);
+
+        timeOfDeath = counter;
     }
 }
