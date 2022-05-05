@@ -70,12 +70,12 @@ public class PlayerMovementController : MonoBehaviour
 
             int maxIntensity = 100;
             int delay = 5;
-            int sirenDelay = 100;
+            int sirenDelay = 600;
             damageFilter.GetComponent<MeshRenderer>().material.color = new Color(1f, 0f, 0f, (counter / delay % maxIntensity) / 255f);
 
             if (counter % sirenDelay == 0)
             {
-                //siren.PlayOneShot(siren.clip);
+                siren.PlayOneShot(siren.clip);
             }
         }
     }
