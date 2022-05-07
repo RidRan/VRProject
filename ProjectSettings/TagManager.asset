@@ -25,7 +25,6 @@ TagManager:
   - Yellow
   - Wasabi
   - SeaWeed
-  - Greenonion
   - Cod
   - Cucumber
   - TicketManager
@@ -33,6 +32,13 @@ TagManager:
   - SaveData
   - CucumberBossController
   - SoundManager
+  - CucumberSlice
+  - GreenOnionSlice
+  - GreenOnion
+  - SalmonSlice
+  - SeaWeedSlice
+  - PufferSlice
+  - CodSlice
   layers:
   - Default
   - TransparentFX

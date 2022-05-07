@@ -20,7 +20,7 @@ public class ShopSoundController : MonoBehaviour
     void Update()
     {
 
-        if (ticketManager.data.totalTickets == 2 || ticketManager.data.totalTickets == 10)
+        if (ticketManager.data.totalTickets == 5 || ticketManager.data.totalTickets == 10)
         {
             Debug.Log("Play alarm here");
 
@@ -31,7 +31,6 @@ public class ShopSoundController : MonoBehaviour
         {
             soundManager.mute = false;
             source.mute = true;
-
         }
 
     }

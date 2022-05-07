@@ -15,9 +15,10 @@ GameObject:
   - component: {fileID: 1603304250232605320}
   - component: {fileID: 239415887322379931}
   - component: {fileID: 3682892652712343291}
+  - component: {fileID: 8902312177677325099}
   m_Layer: 0
   m_Name: cucumberSlice
-  m_TagString: Cucumber
+  m_TagString: CucumberSlice
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -221,3 +222,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slice: {fileID: 919132149155446097, guid: 2a4efce31aa6746a58f9cc0dd1968d47, type: 3}
+--- !u!65 &8902312177677325099
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6823771292260763790}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.0056426805, y: 0.00091255276, z: 0.005642681}
+  m_Center: {x: 1.818808e-10, y: 0.000023132328, z: 0}
