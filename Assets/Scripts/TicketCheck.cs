@@ -6,6 +6,7 @@ public class TicketCheck : MonoBehaviour
 {
     private TicketManager ticketManager;
     private RollManager rollManager;
+    private SushiLightControler sushiLight;
 
 
     // Start is called before the first frame update
@@ -13,6 +14,7 @@ public class TicketCheck : MonoBehaviour
     {
         ticketManager = GameObject.FindGameObjectWithTag("TicketManager").GetComponent<TicketManager>();
         rollManager = GameObject.FindGameObjectWithTag("RollManager").GetComponent<RollManager>();
+        sushiLight = GameObject.FindGameObjectWithTag("SushiLight").GetComponent<SushiLightControler>();
     }
 
     // Update is called once per frame
@@ -68,6 +70,9 @@ public class TicketCheck : MonoBehaviour
 
             double value = rollManager.CompareRoll(baseTag, topping1Tag, topping2Tag);
             Debug.Log(value);
+
+            sushiLight.changeLightColor(value);
+
             Destroy(other.gameObject);
             Destroy(gameObject);
             ticketManager.WaitSpawnTicket();

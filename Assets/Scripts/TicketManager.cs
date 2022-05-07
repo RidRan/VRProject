@@ -49,25 +49,33 @@ public class TicketManager : MonoBehaviour
     public GameObject SpawnATicket()
 	{
 		data.totalTickets++;
-		if (ticketPrefab == null)
-		{
+		if(data.totalTickets == 5 || data.totalTickets == 10)
+        {
 			return null;
-		}
-
-		GameObject ticket = Instantiate(ticketPrefab, SpawnPoint.position, transform.rotation) as GameObject;
-		ticket.transform.localScale = new Vector3(scale, scale, scale);
-
-		if (sendSpawnMessageToParent)
-		{
-			if (transform.parent != null)
+        }
+		else
+        {
+			if (ticketPrefab == null)
 			{
-				transform.parent.SendMessage("OnTicketSpawned", ticket, SendMessageOptions.DontRequireReceiver);
+				return null;
 			}
+
+			GameObject ticket = Instantiate(ticketPrefab, SpawnPoint.position, transform.rotation) as GameObject;
+			ticket.transform.localScale = new Vector3(scale, scale, scale);
+
+			if (sendSpawnMessageToParent)
+			{
+				if (transform.parent != null)
+				{
+					transform.parent.SendMessage("OnTicketSpawned", ticket, SendMessageOptions.DontRequireReceiver);
+				}
+			}
+
+			spawning = false;
+
+			return ticket;
 		}
-
-		spawning = false;
-
-		return ticket;
+		
 	}
 
 	public void WaitSpawnTicket(float seconds = 2)
