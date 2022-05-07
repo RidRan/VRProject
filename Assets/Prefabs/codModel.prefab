@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: -1735476817701995847}
   - component: {fileID: 229700573775755159}
   - component: {fileID: -7374457445019127938}
-  - component: {fileID: -3600450389720088759}
   - component: {fileID: 6400778936949572081}
   m_Layer: 0
   m_Name: codModel
@@ -246,23 +245,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slice: {fileID: 0}
---- !u!114 &-3600450389720088759
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4471754724253440803}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c74b9b79e7d79c048a3f5f2f0e37119d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _isSolid: 1
-  _reverseWindTriangles: 1
-  _useGravity: 1
-  _shareVertices: 1
-  _smoothVertices: 1
 --- !u!64 &6400778936949572081
 MeshCollider:
   m_ObjectHideFlags: 0

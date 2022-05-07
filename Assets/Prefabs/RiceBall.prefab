@@ -236,16 +236,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hand: {fileID: 0}
   toppingslist:
-  - Topping
-  - Red
-  - Blue
-  - Pink
-  - Green
-  - Yellow
-  - Puffer
-  - Salmon
-  - Cod
-  - Greenonion
-  - Cucumber
-  - SeaWeed
+  - PufferSlice
+  - SalmonSlice
+  - CodSlice
+  - GreenOnionSlice
+  - CucumberSlice
+  - SeaWeedSlice
   - Wasabi

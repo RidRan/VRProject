@@ -15,8 +15,7 @@ GameObject:
   - component: {fileID: 6980070718022187923}
   - component: {fileID: 2602779992485949978}
   - component: {fileID: -3591749194668228787}
-  - component: {fileID: 3521683447357461764}
-  - component: {fileID: 6596867944606656208}
+  - component: {fileID: 990365524860992312}
   m_Layer: 0
   m_Name: seaweedModel
   m_TagString: SeaWeed
@@ -33,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 5827078401660316965}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -246,25 +245,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   interactable: {fileID: 0}
---- !u!114 &3521683447357461764
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5827078401660316965}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c74b9b79e7d79c048a3f5f2f0e37119d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _isSolid: 1
-  _reverseWindTriangles: 1
-  _useGravity: 1
-  _shareVertices: 1
-  _smoothVertices: 1
---- !u!64 &6596867944606656208
-MeshCollider:
+--- !u!65 &990365524860992312
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -273,7 +255,6 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 1123070016038160591, guid: 01d9a46a0085446adaa588a47625af6a, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 0.018145058, y: 0.004213801, z: 0.020053502}
+  m_Center: {x: 0, y: 0.00015243306, z: -0.000000007450581}

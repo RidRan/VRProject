@@ -28,7 +28,7 @@ public class SlicingSounds : MonoBehaviour
                 source.clip = currentClip;
                 source.Play();
             }
-        } else if((other.gameObject.CompareTag("Greenonion")) || (other.gameObject.CompareTag("SeaWeed")) | (other.gameObject.CompareTag("Cucumber")))
+        } else if((other.gameObject.CompareTag("GreenOnion")) || (other.gameObject.CompareTag("SeaWeed")) | (other.gameObject.CompareTag("Cucumber")))
         {
             if (!source.isPlaying)
             {

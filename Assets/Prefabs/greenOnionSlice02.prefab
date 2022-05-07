@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 5428477903609635982}
   m_Layer: 0
   m_Name: greenOnionSlice02
-  m_TagString: Greenonion
+  m_TagString: GreenOnionSlice
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
