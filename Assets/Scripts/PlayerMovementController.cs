@@ -47,31 +47,28 @@ public class PlayerMovementController : MonoBehaviour
 
         if (fade)
         {
-            Debug.Log("deadFade");
 
             if (fadeTime == 0) fadeTime = counter;
 
-            int delay = 1;
+            int delay = 2;
             damageFilter.GetComponent<MeshRenderer>().material.color = new Color(0f, 0f, 0f, (counter - fadeTime) / delay / 255f);
+            AudioListener.volume -= delay / 1000f;
 
-            if (counter - fadeTime > 300)
+            if (counter - fadeTime > 600)
             {
                 fade = false;
                 currentHealth = maxHealth;
                 damageFilter.GetComponent<MeshRenderer>().material.color = new Color(0f, 0f, 0f, 0f);
                 SceneManager.LoadScene("BossfightDemo");
-                Destroy(gameObject);
             }
         }
             
         if (damaged)
         {
-            Debug.Log("damageFade");
 
-            int maxIntensity = 100;
-            int delay = 5;
-            int sirenDelay = 600;
-            damageFilter.GetComponent<MeshRenderer>().material.color = new Color(1f, 0f, 0f, (counter / delay % maxIntensity) / 255f);
+            int speed = 5;
+            int sirenDelay = 300;
+            damageFilter.GetComponent<MeshRenderer>().material.color = damageFilter.GetComponent<MeshRenderer>().material.color + new Color(0f, 0f, 0f, -speed / 255f);
 
             if (counter % sirenDelay == 0)
             {
@@ -104,9 +101,10 @@ public class PlayerMovementController : MonoBehaviour
 
         Debug.Log(currentHealth + "/" + maxHealth);
 
-        if ((float) currentHealth / maxHealth <= .25f && currentHealth > 0)
+        if ((float) currentHealth / maxHealth <= .35f && currentHealth > 0)
         {
             damaged = true;
+            damageFilter.GetComponent<MeshRenderer>().material.color = new Color(1f, 0f, 0f, .5f);
         }
     }
 }
