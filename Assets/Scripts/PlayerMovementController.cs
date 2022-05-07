@@ -26,11 +26,14 @@ public class PlayerMovementController : MonoBehaviour
     public GameObject leftSword;
     public GameObject rightSword;
 
+    int sirenTime;
+
     // Start is called before the first frame update
     void Start()
     {
         currentHealth = maxHealth;
         damageFilter.GetComponent<MeshRenderer>().material.color = new Color(1f, 0f, 0f, 0f);
+        AudioListener.volume = 1f;
     }
 
     // Update is called once per frame
@@ -66,14 +69,8 @@ public class PlayerMovementController : MonoBehaviour
         if (damaged)
         {
 
-            int speed = 5;
-            int sirenDelay = 300;
+            int speed = 2;
             damageFilter.GetComponent<MeshRenderer>().material.color = damageFilter.GetComponent<MeshRenderer>().material.color + new Color(0f, 0f, 0f, -speed / 255f);
-
-            if (counter % sirenDelay == 0)
-            {
-                siren.PlayOneShot(siren.clip);
-            }
         }
     }
 
@@ -101,10 +98,15 @@ public class PlayerMovementController : MonoBehaviour
 
         Debug.Log(currentHealth + "/" + maxHealth);
 
-        if ((float) currentHealth / maxHealth <= .35f && currentHealth > 0)
+        if ((float) currentHealth / maxHealth <= .5f && currentHealth > 0)
         {
             damaged = true;
             damageFilter.GetComponent<MeshRenderer>().material.color = new Color(1f, 0f, 0f, .5f);
+            if (counter > sirenTime + 90)
+            {
+                siren.PlayOneShot(siren.clip);
+                sirenTime = counter;
+            }
         }
     }
 }
