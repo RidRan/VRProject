@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 6134852998858094807}
   - component: {fileID: 7673816193859051743}
   - component: {fileID: 7673816193859051716}
+  - component: {fileID: 7729538682876837544}
   m_Layer: 0
   m_Name: RiceBall
   m_TagString: Rice
@@ -200,10 +201,34 @@ MonoBehaviour:
   restoreOriginalParent: 0
   onPickUp:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7729538682876837544}
+        m_TargetAssemblyTypeName: Topping, Assembly-CSharp
+        m_MethodName: onPickUpTopping
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onDetachFromHand:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7729538682876837544}
+        m_TargetAssemblyTypeName: Topping, Assembly-CSharp
+        m_MethodName: onDropTopping
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onHeldUpdate:
     m_PersistentCalls:
       m_Calls: []
@@ -243,3 +268,16 @@ MonoBehaviour:
   - CucumberSlice
   - SeaWeedSlice
   - Wasabi
+--- !u!114 &7729538682876837544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7673816194883625984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21f1ebbf922a2d345975f638ba656e23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slice: {fileID: 7673816194883625984}

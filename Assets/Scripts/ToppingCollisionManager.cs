@@ -29,7 +29,7 @@ public class ToppingCollisionManager : MonoBehaviour
         {
 
             Destroy(other.gameObject.GetComponent<Throwable>());
-            //Destroy(other.gameObject.GetComponent<Rigidbody>());
+            Destroy(other.gameObject.GetComponent<Rigidbody>());
             other.transform.parent = transform;
             // if(gameObject.GetComponent<FixedJoint>() == null || other.gameObject.GetComponent<FixedJoint>() == null)
             // {

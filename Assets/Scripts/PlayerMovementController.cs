@@ -101,7 +101,7 @@ public class PlayerMovementController : MonoBehaviour
         if ((float) currentHealth / maxHealth <= .5f && currentHealth > 0)
         {
             damaged = true;
-            damageFilter.GetComponent<MeshRenderer>().material.color = new Color(1f, 0f, 0f, .5f);
+            damageFilter.GetComponent<MeshRenderer>().material.color = new Color(1f, 0f, 0f, 1f);
             if (counter > sirenTime + 90)
             {
                 siren.PlayOneShot(siren.clip);

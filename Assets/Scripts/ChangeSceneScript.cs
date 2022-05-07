@@ -36,13 +36,13 @@ namespace Valve.VR.InteractionSystem.Sample
             counter++;
             if (cutscene && counter > cutsceneLength)
             {
-                if (data.totalTickets <= 5)
-                {
-                    UnityEngine.SceneManagement.SceneManager.LoadScene(loadLevel1Name);
-                }
-                else if (data.totalTickets > 5)
+                if (data.totalTickets > 9)
                 {
                     UnityEngine.SceneManagement.SceneManager.LoadScene(loadLevel2Name);
+                }
+                else 
+                {
+                    UnityEngine.SceneManagement.SceneManager.LoadScene(loadLevel1Name);
                 }
             }
         }
