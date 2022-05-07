@@ -53,7 +53,7 @@ public class SlicerFix : MonoBehaviour
         }
         else if(other.gameObject.CompareTag("GreenOnion"))
         {
-            GameObject[] slices = SliceGood(other.gameObject, greenOnionSlicePrefab, 1f);
+            GameObject[] slices = SliceGood(other.gameObject, greenOnionSlicePrefab, 2.5f);
             Destroy(other.gameObject);
         }
         else if(other.gameObject.CompareTag("Cod"))

@@ -68,6 +68,8 @@ public class BossController : MonoBehaviour
 
     public string loadLevelName;
 
+    public Material spikeSkin;
+
     // Start is called before the first frame update
     void Start()
     {

@@ -17,7 +17,6 @@ public class CucumberBossController : MonoBehaviour
     public float turnSpeed;
     private float moveTarget;
 
-
     public float maxHealth;
     private float currentHealth;
     public float cucumberDamage;
@@ -175,7 +174,7 @@ public class CucumberBossController : MonoBehaviour
 
     public void setBossHealth()
     {
-        currentHealth -= 5;
+        currentHealth -= 1;
         leftTears.Play();
         rightTears.Play();
 
@@ -201,7 +200,7 @@ public class CucumberBossController : MonoBehaviour
         body.SetActive(false);
 
         int numFillets = 20;
-        float sizeFillet = 1f;
+        float sizeFillet = 2.5f;
         float spaceFillet = 5f;
 
         for (int i = 0; i < numFillets; i++)

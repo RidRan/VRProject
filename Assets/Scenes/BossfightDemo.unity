@@ -18021,6 +18021,7 @@ MonoBehaviour:
   breatheSpeed: 50
   breatheValue: 2.5
   loadLevelName: LeavingCutScene
+  spikeSkin: {fileID: 2100000, guid: 4f8fc26bf76d6274ca13d114b367db15, type: 2}
 --- !u!82 &1447880512
 AudioSource:
   m_ObjectHideFlags: 0
